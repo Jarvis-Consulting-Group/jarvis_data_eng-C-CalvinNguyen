@@ -9,7 +9,7 @@ psql_password=$5
 
 #Check # of CLI arguments passed. (echo msg and exit 1 if it's not equal to 5)
 if [ "$#" -ne 5 ]; then
-  echo "Illegal number of parameters"
+  echo "Illegal number of params"
   exit 1
 fi
 
@@ -17,7 +17,7 @@ fi
 hostname=$(hostname -f)
 lscpu_info=$(lscpu)
 
-#Put specific hardware information into variables
+#Put specific hardware information and timestamp into variables
 cpu_number=$(echo "$lscpu_info" | egrep "^CPU\(s\):" | awk '{print $2}' | xargs)
 cpu_architecture=$(echo "$lscpu_info" | egrep "^Architecture:" | awk '{print $2}' | xargs)
 cpu_model=$(echo "$lscpu_info" | egrep "^Model name:" | awk '{$1=$2=""; print $0}' | xargs)
