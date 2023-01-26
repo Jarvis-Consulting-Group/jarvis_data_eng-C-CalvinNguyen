@@ -28,7 +28,7 @@ Project source code: [https://github.com/Jarvis-Consulting-Group/jarvis_data_eng
 
 **Software Developer, Jarvis (2020-present)**: Donec mattis sed justo et sagittis. Vestibulum lacinia nulla ipsum. Curabitur imperdiet nibh vitae leo lacinia laoreet. Nullam accumsan, lectus ut maximus ultricies, augue justo egestas mi, vel bibendum felis.
 
-**Tutor, XYZ Company (2019)**: Donec mattis sed justo et sagittis. Vestibulum lacinia nulla ipsum. Curabitur imperdiet nibh vitae leo lacinia laoreet. Nullam accumsan, lectus ut maximus ultricies, augue justo egestas mi, vel bibendum felis.
+**Bartender/Server, Hazel's Diner (2018-2020)**: Worked as a team in a fast-paced environment where communication with coworkers and customers was the key to fulfilling orders and providing excellent service within a given time frame. Responsibilities of the position included bussing food, mixing drinks, cleaning tables, managing dishwashers, and other tasks. I gained certifications such as Smart Serve and First Aid for the position. I learned more about the restaurant's workflow when working alongside the team, and this diversified my responsibilities within the restaurant.
 
 
 ## Education
@@ -38,8 +38,5 @@ Project source code: [https://github.com/Jarvis-Consulting-Group/jarvis_data_eng
 
 
 ## Miscellaneous
-- Udacity Machine Learning (2019)
-- Winner
-- Basketball player
-- Competitive gaming
-- Volunteer, ABC Food bank: Ut enim ad minim veniam
+- Ice Skating and Watching hockey.
+- Brewing beer (Pale ales, IPAs, Stouts)

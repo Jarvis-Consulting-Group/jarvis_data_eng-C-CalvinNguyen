@@ -35,21 +35,8 @@
   "others": [
     {
       "bullets": [
-        "Udacity Machine Learning (2019)"
-      ],
-      "title": "Certificates"
-    },
-    {
-      "bullets": [
-        "Winner"
-      ],
-      "title": "Awards"
-    },
-    {
-      "bullets": [
-        "Basketball player",
-        "Competitive gaming",
-        "Volunteer, ABC Food bank: Ut enim ad minim veniam"
+        "Ice Skating and Watching hockey.",
+        "Brewing beer (Pale ales, IPAs, Stouts)"
       ],
       "title": "Activities/Hobbies"
     }
@@ -62,10 +49,10 @@
       "title": "Software Developer"
     },
     {
-      "company": "XYZ Company",
-      "description": "Donec mattis sed justo et sagittis. Vestibulum lacinia nulla ipsum. Curabitur imperdiet nibh vitae leo lacinia laoreet. Nullam accumsan, lectus ut maximus ultricies, augue justo egestas mi, vel bibendum felis.",
-      "duration": "2019",
-      "title": "Tutor"
+      "company": "Hazel's Diner",
+      "description": "Worked as a team in a fast-paced environment where communication with coworkers and customers was the key to fulfilling orders and providing excellent service within a given time frame. Responsibilities of the position included bussing food, mixing drinks, cleaning tables, managing dishwashers, and other tasks. I gained certifications such as Smart Serve and First Aid for the position. I learned more about the restaurant's workflow when working alongside the team, and this diversified my responsibilities within the restaurant.",
+      "duration": "2018-2020",
+      "title": "Bartender/Server"
     }
   ],
   "skills": {
