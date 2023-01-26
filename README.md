@@ -15,27 +15,11 @@ Greetings, feel free to call me Calvin. I am a dedicated team player who is inqu
 Project source code: [https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen](https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen)
 
 
-**Cluster Monitor** [[GitHub](https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen/tree/master/linux_sql)]: Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.
-
-**Core Java Apps** [[GitHub](https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen/tree/master/core_java)]:
-      
-  - Twitter App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam.
-  - JDBC App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam.
-  - Grep App: Curabitur laoreet tristique leo, eget suscipit nisi. Sed in sodales ex. Maecenas vitae tincidunt dui, et eleifend quam.
-
-**Springboot App** [[GitHub](https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen/tree/master/springboot)]: Not Started
-
-**Python Data Analytics** [[GitHub](https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen/tree/master/python_data_anlytics)]: Not Started
-
-**Hadoop** [[GitHub](https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen/tree/master/hadoop)]: Not Started
-
-**Spark** [[GitHub](https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen/tree/master/spark)]: Not Started
-
-**Cloud/DevOps** [[GitHub](https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen/tree/master/cloud_devops)]: Not Started
+**Linux Cluster Monitor** [[GitHub](https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen/tree/master/linux_sql)]: Collects the hardware specifications and usage for the Linux nodes within a cluster and stores this data inside the database. The technologies used to achieve this are Docker, PostgreSQL, Bash scripts, and some Linux commands like crontab. Docker manages a container running the PostgreSQL database, and the container is set up using a Bash script (psql_docker.sh). The other Bash scripts (hardware_info.sh and hardware_usage.sh) collect and store the data from the machine using Linux commands like lscpu, vmstat, and psql. Finally, crontab jobs schedule the script's execution every minute.
 
 
 ## Highlighted Projects
-**Web app for resturant** [[GitHub](https://github.com/jarviscanada/jarvis_profile_builder)]: Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.
+**Ionic/Angular Mobile Music Player Application & Streaming System** [[GitHub](https://github.com/jarviscanada/jarvis_profile_builder)]: Plays local audio files on Android mobile devices, and the app can also create an account to upload and stream files from the backend server/system. The project uses the MEAN stack that includes technologies such as MongoDB that stores account information once an account is registered. The front-end/client-side mobile application uses Angular/(Ionic); it can read local audio files, stores their metadata into an SQLite local storage, play these files, and connect to the backend server once authenticated. The NodeJS backend server allows users to create accounts, upload audio files onto the server, and stream it back to the user.
 
 **Machine Learning**: Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.
 
