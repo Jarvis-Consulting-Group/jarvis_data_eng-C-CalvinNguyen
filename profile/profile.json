@@ -19,9 +19,9 @@
       "name": "Ionic/Angular Mobile Music Player Application \u0026 Streaming System"
     },
     {
-      "description": "Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.",
+      "description": "Allows users to create, manage, search, share, and favorite recipes on the application. Includes other features like planning a meal schedule or creating a shopping list from the ingredient's checklist in a recipe. The project uses Spring for the backend controllers and services, Thymeleaf for the front-end templating engine in HTML/CSS files, and H2 Database that is integrated into Spring automatically through a SQL file.",
       "git_url": null,
-      "name": "Machine Learning"
+      "name": "Spring Cookbook App"
     }
   ],
   "jarvis_projects": [
