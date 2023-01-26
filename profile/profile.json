@@ -19,7 +19,7 @@
       "school_name": "XYZ university"
     }
   ],
-  "github_repo_root_url": "https://github.com/jarviscanada/jarvis_data_eng_demo",
+  "github_repo_root_url": "https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen",
   "highlighted_projects": [
     {
       "description": "Suspendisse a tincidunt odio. Suspendisse posuere luctus aliquet. Quisque magna tellus, tempor vitae arcu sed, volutpat scelerisque lacus. Aliquam varius pulvinar dapibus. Ut a tincidunt sem. Aenean sollicitudin fringilla erat ut imperdiet. Phasellus fermentum, enim vitae laoreet elementum, eros nisl hendrerit lorem.",
@@ -112,26 +112,26 @@
   ],
   "skills": {
     "competent": [
-      "Donec",
-      "fermentum",
-      "Donec",
-      "fermentum",
-      "Donec"
+      "Java",
+      "HTML/CSS",
+      "Python",
+      "Agile/Scrum",
+      "REST APIs"
     ],
     "familiar": [
-      "Donec",
-      "fermentum",
-      "fermentum",
-      "fermentum",
-      "fermentum"
+      "C#",
+      "Spring",
+      "ASP.NET",
+      "Docker",
+      "Linux/Bash"
     ],
     "proficient": [
-      "Java",
-      "Linux/Bash",
-      "RDBMS/SQL",
-      "Agile/Scrum",
-      "Git"
+      "JavaScript",
+      "Angular/React",
+      "NodeJS",
+      "Git",
+      "RDBMS/SQL"
     ]
   },
-  "summary": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed venenatis a orci ac malesuada. Vivamus ligula elit, viverra eu ante porttitor, blandit convallis augue. Aliquam justo justo, mollis at lacus eu, rutrum finibus est. Vestibulum venenatis purus id accumsan pretium. In efficitur magna nec enim laoreet tincidunt. Ut libero metus, scelerisque nec eros vitae, sagittis pellentesque enim. Donec dictum felis volutpat, vehicula magna eu, imperdiet elit. Phasellus ut velit a massa efficitur faucibus. Sed volutpat, lacus sed sagittis luctus, elit."
+  "summary": "Greetings, feel free to call me Calvin. I am a dedicated team player who is inquisitive, likes to keep a firm schedule, and mostly goes by the books with some flexibility if necessary. I recently graduated from the Computer Programmer Analyst program at George Brown College with an Ontario College Advanced Diploma and a GPA of 3.83/4. Although most of my knowledge of the tech/IT industry comes from my time at Jarvis and my educational background at George Brown, I have gained other skills outside of this field. My ability to communicate and act as a team player established itself throughout my time as a bartender/server. I worked in a rough fast-paced environment that required me to be on my toes, give the best possible service to customers, and work within a tight-knit team. I'm a fan of hockey and ice skating. I am also quite a hobbyist with hobbies such as brewing beer, where I experiment with recipes to get the best possible batch, which is why I also like tech because I constantly learn, test, and create software. Overall, I'm hoping for an opportunity in the software development industry where I can prove myself as a team member."
 }
