@@ -26,7 +26,7 @@ Project source code: [https://github.com/Jarvis-Consulting-Group/jarvis_data_eng
 
 ## Professional Experiences
 
-**Software Developer, Jarvis (2020-present)**: Donec mattis sed justo et sagittis. Vestibulum lacinia nulla ipsum. Curabitur imperdiet nibh vitae leo lacinia laoreet. Nullam accumsan, lectus ut maximus ultricies, augue justo egestas mi, vel bibendum felis.
+**Software Developer, Jarvis (2023-present)**: Joined as a Junior Software Developer to learn new technologies by working on projects in an Agile/Scrum environment; the technologies are used within the professional workplace for Jarvis' clients like CIBC. These technologies are, for example, Linux, SQL, Java, Spring, etc.
 
 **Bartender/Server, Hazel's Diner (2018-2020)**: Worked as a team in a fast-paced environment where communication with coworkers and customers was the key to fulfilling orders and providing excellent service within a given time frame. Responsibilities of the position included bussing food, mixing drinks, cleaning tables, managing dishwashers, and other tasks. I gained certifications such as Smart Serve and First Aid for the position. I learned more about the restaurant's workflow when working alongside the team, and this diversified my responsibilities within the restaurant.
 
@@ -38,5 +38,6 @@ Project source code: [https://github.com/Jarvis-Consulting-Group/jarvis_data_eng
 
 
 ## Miscellaneous
-- Ice Skating and Watching hockey.
+- Co-operative games like board games or online multiplayer video games.
 - Brewing beer (Pale ales, IPAs, Stouts)
+- Ice skating and hockey.

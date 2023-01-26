@@ -35,8 +35,9 @@
   "others": [
     {
       "bullets": [
-        "Ice Skating and Watching hockey.",
-        "Brewing beer (Pale ales, IPAs, Stouts)"
+        "Co-operative games like board games or online multiplayer video games.",
+        "Brewing beer (Pale ales, IPAs, Stouts)",
+        "Ice skating and hockey."
       ],
       "title": "Activities/Hobbies"
     }
@@ -44,8 +45,8 @@
   "professional_experience": [
     {
       "company": "Jarvis",
-      "description": "Donec mattis sed justo et sagittis. Vestibulum lacinia nulla ipsum. Curabitur imperdiet nibh vitae leo lacinia laoreet. Nullam accumsan, lectus ut maximus ultricies, augue justo egestas mi, vel bibendum felis.",
-      "duration": "2020-present",
+      "description": "Joined as a Junior Software Developer to learn new technologies by working on projects in an Agile/Scrum environment; the technologies are used within the professional workplace for Jarvis' clients like CIBC. These technologies are, for example, Linux, SQL, Java, Spring, etc.",
+      "duration": "2023-present",
       "title": "Software Developer"
     },
     {
