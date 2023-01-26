@@ -32,12 +32,9 @@ Project source code: [https://github.com/Jarvis-Consulting-Group/jarvis_data_eng
 
 
 ## Education
-**XYZ university (2012-2016)**, Bachelor of Applied Sciences, Electrical and Computer Engineering
-- Scholarship
-- Dean's List (2015, 2016): Ut enim ad minim veniam
-- GPA: 3.8/4.0
-
-**XYZ university (2016-2018)**, Master of Engineering, Electrical and Computer Engineering
+**George Brown College (2019-2022)**, Ontario College Advanced Diploma, T127 Computer Programmer Analyst - School of Computer Technology
+- Dean's List (2019-2022): Was on the Dean's list by achieving a term GPA above 3.5
+- GPA: 3.83/4.0
 
 
 ## Miscellaneous
