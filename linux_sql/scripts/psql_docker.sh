@@ -29,6 +29,9 @@ case $cmd in
       exit 1
     fi
 
+    #Set environment variable of password
+    export PGPASSWORD=$db_password
+
     # Create the docker volume
     docker volume create pgdata
 
