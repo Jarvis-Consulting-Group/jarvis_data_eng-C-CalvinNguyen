@@ -15,12 +15,12 @@
   "highlighted_projects": [
     {
       "description": "Plays local audio files on Android mobile devices, and the app can also create an account to upload and stream files from the backend server/system. The project uses the MEAN stack that includes technologies such as MongoDB that stores account information once an account is registered. The front-end/client-side mobile application uses Angular/(Ionic); it can read local audio files, stores their metadata into an SQLite local storage, play these files, and connect to the backend server once authenticated. The NodeJS backend server allows users to create accounts, upload audio files onto the server, and stream it back to the user.",
-      "git_url": "https://github.com/jarviscanada/jarvis_profile_builder",
+      "git_url": "https://github.com/C-CalvinNguyen/Angular-Ionic-Music-Player-and-Backend",
       "name": "Ionic/Angular Mobile Music Player Application \u0026 Streaming System"
     },
     {
       "description": "Allows users to create, manage, search, share, and favorite recipes on the application. Includes other features like planning a meal schedule or creating a shopping list from the ingredient's checklist in a recipe. The project uses Spring for the backend controllers and services, Thymeleaf for the front-end templating engine in HTML/CSS files, and H2 Database that is integrated into Spring automatically through a SQL file.",
-      "git_url": null,
+      "git_url": "https://github.com/C-CalvinNguyen/Spring_Cookbook_App",
       "name": "Spring Cookbook App"
     }
   ],
