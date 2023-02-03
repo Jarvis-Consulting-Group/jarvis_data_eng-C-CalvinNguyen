@@ -36,7 +36,7 @@ UPDATE
 SET
     initialoutlay = 10000
 WHERE
-    name like 'Tennis Court%'
+    name like '%Tennis Court%'
     AND initialoutlay = 8000;
 
 -- 4.
@@ -299,7 +299,7 @@ ORDER BY
 
 SELECT
     COUNT(memid) OVER(),
-        firstname,
+    firstname,
     surname
 FROM
     cd.members
@@ -310,7 +310,7 @@ ORDER BY
 
 SELECT
     ROW_NUMBER() OVER(),
-        firstname,
+    firstname,
     surname
 FROM
     cd.members
