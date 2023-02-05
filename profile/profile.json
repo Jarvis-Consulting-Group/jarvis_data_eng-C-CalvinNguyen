@@ -29,6 +29,11 @@
       "description": "Collects the hardware specifications and usage for the Linux nodes within a cluster and stores this data inside the database. Docker manages a container running the PostgreSQL database, and this container is set up using a Bash script (psql_docker.sh). The other Bash scripts (hardware_info.sh and hardware_usage.sh) collect and store the data in the database using Linux commands like lscpu, vmstat, and psql. Finally, a cron job schedules the script's execution every minute and stores the data in the PostgreSQL database within the Docker container.",
       "git_url": "/linux_sql",
       "name": "Linux Cluster Monitor"
+    },
+    {
+      "description": "Familiarize ourselves with concepts of relational databases, relational database management systems, structured query language, optimizations, and data models. To grasp these concepts, I worked on manipulating existing data using an IDE called pgAdmin and manually compared my query results with the expected results given. The file clubdata.sql, which contained the existing data, was inserted into a PostgreSQL database deployed within a Docker container.",
+      "git_url": "/sql",
+      "name": "SQL: Manipulate an Existing Database"
     }
   ],
   "name": "Chi Calvin Nguyen",
