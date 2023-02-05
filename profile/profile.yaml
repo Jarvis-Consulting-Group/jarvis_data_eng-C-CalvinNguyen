@@ -5,7 +5,7 @@ github_repo_root_url: https://github.com/Jarvis-Consulting-Group/jarvis_data_eng
 
 # Introduce yourself, your academic and professional background.
 # What excites you about the software industry and your passion. At least 80 words
-summary: Greetings, feel free to call me Calvin. I am a dedicated team player who is inquisitive, likes to keep a firm schedule, and mostly goes by the books with some flexibility if necessary. I recently graduated from the Computer Programmer Analyst program at George Brown College with an Ontario College Advanced Diploma and a GPA of 3.83/4. Although most of my knowledge of the tech/IT industry comes from my time at Jarvis and my educational background at George Brown, I have gained other skills outside of this field. My ability to communicate and act as a team player established itself throughout my time as a bartender/server. I worked in a rough fast-paced environment that required me to be on my toes, give the best possible service to customers, and work within a tight-knit team. I'm a fan of hockey and ice skating. I am also quite a hobbyist with hobbies such as brewing beer, where I experiment with recipes to get the best possible batch, which is why I also like tech because I constantly learn, test, and create software. Overall, I'm hoping for an opportunity in the software development industry where I can prove myself as a team member.
+summary: I am a dedicated team player who is inquisitive, punctual, and goes by the book. I recently graduated with an Ontario College Advanced Diploma from the Computer Programming & Analysis program at George Brown College. During my time at George Brown, I've learned technologies such as React, Node.js, Angular, MongoDB, Spring, and ASP.NET by building projects like a front-end application that connects to an open-source weather API or full-stack applications where we built both the front and backend while following Agile project management methodology. I've also gained other skills outside George Brown that are crucial to a workplace. My ability to communicate and act as a team player established itself throughout my time as a bartender/server. I worked in a rough fast-paced environment that required me to be on my toes, give the best possible service to customers, and work within a tight-knit team. I am quite a hobbyist with hobbies such as brewing beer, where I experiment with recipes to get the best possible batch, which is why I also like tech because I constantly learn, test, and create software. Overall, I'm hoping for an opportunity in the software development industry where I can prove myself as a team member.
 
 # Group your skills by level.
 # Your skills can be anything software related (e.g. language, frameworks, methodologies, software, etc.).
@@ -20,17 +20,19 @@ skills:
   # At least 5 skills
   competent:
     - Java
-    - HTML/CSS
+    - Spring
+    - Docker
     - Python
     - Agile/Scrum
     - REST APIs
+    - HTML/CSS
   # At least 5 skills
   familiar:
-    - C#
-    - Spring
-    - ASP.NET
-    - Docker
     - Linux/Bash
+    - C#
+    - ASP.NET
+    - PHP
+    - Swift
 
 # List of Jarvis projects
 jarvis_projects:
@@ -38,7 +40,7 @@ jarvis_projects:
     git_url: "/linux_sql"
     # The project description allows hiring managers to understand your project and technologies you used(e.g. programming languages, libraries, algorithms, hardware, tools, etc.).
     # The project description must start with an action verb (https://bit.ly/3guO98u)
-    description: Collects the hardware specifications and usage for the Linux nodes within a cluster and stores this data inside the database. The technologies used to achieve this are Docker, PostgreSQL, Bash scripts, and some Linux commands like crontab. Docker manages a container running the PostgreSQL database, and the container is set up using a Bash script (psql_docker.sh). The other Bash scripts (hardware_info.sh and hardware_usage.sh) collect and store the data from the machine using Linux commands like lscpu, vmstat, and psql. Finally, crontab jobs schedule the script's execution every minute.
+    description: Collects the hardware specifications and usage for the Linux nodes within a cluster and stores this data inside the database. Docker manages a container running the PostgreSQL database, and this container is set up using a Bash script (psql_docker.sh). The other Bash scripts (hardware_info.sh and hardware_usage.sh) collect and store the data in the database using Linux commands like lscpu, vmstat, and psql. Finally, a cron job schedules the script's execution every minute and stores the data in the PostgreSQL database within the Docker container.
 #  - name: "Core Java Apps"
 #    git_url: "/core_java"
 #    description:
@@ -69,7 +71,7 @@ highlighted_projects:
     #URL is optional
     git_url: "https://github.com/C-CalvinNguyen/Angular-Ionic-Music-Player-and-Backend"
     # The project description must start with an action verb (https://bit.ly/3guO98u)
-    description: Plays local audio files on Android mobile devices, and the app can also create an account to upload and stream files from the backend server/system. The project uses the MEAN stack that includes technologies such as MongoDB that stores account information once an account is registered. The front-end/client-side mobile application uses Angular/(Ionic); it can read local audio files, stores their metadata into an SQLite local storage, play these files, and connect to the backend server once authenticated. The NodeJS backend server allows users to create accounts, upload audio files onto the server, and stream it back to the user.
+    description: Plays local audio files on Android mobile devices, and the app can also create an account to upload and stream files from the backend server/system. MongoDB stores account information once an account is registered. The front-end/client-side mobile application uses Angular/(Ionic); it can read local audio files, stores their metadata into an SQLite local storage, play these files, and connect to the backend server once authenticated. The NodeJS backend server allows users to create accounts, upload audio files onto the server, and stream it back to the user.
   - name: "Spring Cookbook App"
     git_url: "https://github.com/C-CalvinNguyen/Spring_Cookbook_App"
     description: Allows users to create, manage, search, share, and favorite recipes on the application. Includes other features like planning a meal schedule or creating a shopping list from the ingredient's checklist in a recipe. The project uses Spring for the backend controllers and services, Thymeleaf for the front-end templating engine in HTML/CSS files, and H2 Database that is integrated into Spring automatically through a SQL file.
@@ -83,7 +85,7 @@ professional_experience:
     company: "Jarvis"
     duration: "2023-present"
     # The project description must start with an action verb (https://bit.ly/3guO98u)
-    description: "Joined as a Junior Software Developer to learn new technologies by working on projects in an Agile/Scrum environment; the technologies are used within the professional workplace for Jarvis' clients like CIBC. These technologies are, for example, Linux, SQL, Java, Spring, etc."
+    description: "I joined as a Junior Software Developer to consult and aid in developing Jarvis' client's software solutions. To do this, I learned new technologies while working on projects at Jarvis in an Agile/Scrum environment where there were daily scrum meetings in the morning to discuss project progress and sprint meetings every two weeks. The technologies learned at Jarvis are specially selected as they are common within the professional tech workplace environment, and an example of these technologies are Linux, SQL, Java, Spring, etc."
   - title: "Bartender/Server"
     company: "Hazel's Diner"
     duration: "2018-2020"
@@ -119,4 +121,4 @@ others:
     bullets:
       - "Co-operative games like board games or online multiplayer video games."
       - "Brewing beer (Pale ales, IPAs, Stouts)"
-      - "Ice skating and hockey."
+      - "Leisure ice skating, watching hockey (on TV or in-person) and playing street hockey or pickup hockey (shinny)."
