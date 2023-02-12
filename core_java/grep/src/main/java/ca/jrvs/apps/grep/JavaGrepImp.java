@@ -22,11 +22,18 @@ public class JavaGrepImp implements JavaGrep {
   private String rootPath;
   private String outFile;
 
+  /**
+   * process() method ties all functionality for JavaGrepImp together:
+   * calls listFiles(), pass the rootPath to get a list of files within the directory/subdirectories
+   * calls readLines(), pass files one by one from list and gets a list of matched strings
+   * calls writeToFile(), pass list of strings, and it will write strings to output file.
+   * @throws IOException Throws IOException
+   */
   @Override
   public void process() throws IOException {
     logger.debug("Process Starting: This is a logger debug message.");
     List<File> fileList = listFiles(this.rootPath);
-    logger.info(fileList.toString());
+    logger.debug(fileList.toString());
 
     ArrayList<String> matchedLines = new ArrayList<String>();
 
@@ -37,6 +44,15 @@ public class JavaGrepImp implements JavaGrep {
     writeToFile(matchedLines);
   }
 
+  /**
+   * Given root directory as a String recursively get all files and insert into an ArrayList.
+   * use .listFiles() method to get all files and directories.
+   * If it is a file, add it to the ArrayList.
+   * If it is a directory, recursively call the function and merge any files from
+   * the subdirectories to the ArrayList.
+   * @param rootDir takes the root directory as a String.
+   * @return return an ArrayList of all the files from the directory and subdirectories.
+   */
   @Override
   public List<File> listFiles(String rootDir) {
     File rootDirectory = new File(rootDir);
@@ -58,9 +74,15 @@ public class JavaGrepImp implements JavaGrep {
     return fileArrayList;
   }
 
+  /**
+   * Given a file, read each line using BufferedReader, call containsPattern() method if it returns
+   * true add the line to the Strings ArrayList and return the ArrayList of matched lines.
+   * @param inputFile takes an input File as an argument
+   * @return Returns a String ArrayList of matched lines.
+   */
   @Override
   public List<String> readLines(File inputFile) {
-    logger.info("Reading File: " + inputFile.getName());
+    logger.debug("Reading File: " + inputFile.getName());
     ArrayList<String> linesArrayList = new ArrayList<String>();
 
     try {
@@ -82,21 +104,34 @@ public class JavaGrepImp implements JavaGrep {
     return linesArrayList;
   }
 
+  /**
+   * Uses java.util.regex classes Pattern and Matcher to match each line given.
+   * @param line Takes each line of a file as a String
+   * @return returns a boolean, true if the line matched, false otherwise.
+   */
   @Override
   public boolean containsPattern(String line) {
     Pattern pattern = Pattern.compile(this.regex);
     Matcher matcher = pattern.matcher(line);
+
     return matcher.find();
   }
 
+  /**
+   * Given a List of Strings write each String into an output file using BufferedWriter.
+   * @param lines Gets a List of strings that matched
+   * @throws IOException Throws IOException
+   */
   @Override
   public void writeToFile(List<String> lines) throws IOException {
     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(this.outFile));
+
     for (String str : lines) {
       logger.info(str);
       bufferedWriter.write(str);
       bufferedWriter.newLine();
     }
+
     bufferedWriter.close();
   }
 
