@@ -1,0 +1,4 @@
+shakespeare.txt:    Is father, mother, Tybalt, Romeo, Juliet,
+shakespeare.txt:Enter Romeo and Juliet aloft, at the Window.
+shakespeare.txt:    And Romeo dead; and Juliet, dead before,
+shakespeare.txt:    Romeo, there dead, was husband to that Juliet;
