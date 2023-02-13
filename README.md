@@ -19,6 +19,12 @@ Project source code: [https://github.com/Jarvis-Consulting-Group/jarvis_data_eng
 
 **SQL: Manipulate an Existing Database** [[GitHub](https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen/tree/master/sql)]: Familiarize ourselves with concepts of relational databases, relational database management systems, structured query language, optimizations, and data models. To grasp these concepts, I worked on manipulating existing data using an IDE called pgAdmin and manually compared my query results with the expected results given. The file clubdata.sql, which contained the existing data, was inserted into a PostgreSQL database deployed within a Docker container.
 
+**Core Java Apps** [[GitHub](https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen/tree/master/core_java)]:
+      
+  - Twitter App: 
+  - JDBC App: 
+  - Grep App: Designed the Java Grep app to replicate the egrep Linux command with the recursive option enabled so that it reads all files within the directory or subdirectory and includes a redirection operator to write matched lines to a file (egrep -r [regex/pattern] [sourceFile] > [targetFile]). Implementation involved using core Java packages like stream API and lambda functions to iterate through directories, lines from a file or a string stream, and java.io, which reads and writes text data from or to the files. Maven builds the project, packages it into a JAR file, and manages dependencies like SLF4J. Debug logging used SLF4J, and unit testing used JUnit4, which aided in manually testing the app by displaying files and matched lines. For deploying, we created a docker image using a Dockerfile, distributed it onto the Docker hub, and ran it on a docker container.
+
 
 ## Highlighted Projects
 **Ionic/Angular Mobile Music Player Application & Streaming System** [[GitHub](https://github.com/C-CalvinNguyen/Angular-Ionic-Music-Player-and-Backend)]: Plays local audio files on Android mobile devices, and the app can also create an account to upload and stream files from the backend server/system. MongoDB stores account information once an account is registered. The front-end/client-side mobile application uses Angular/(Ionic); it can read local audio files, stores their metadata into an SQLite local storage, play these files, and connect to the backend server once authenticated. The NodeJS backend server allows users to create accounts, upload audio files onto the server, and stream it back to the user.
