@@ -6,10 +6,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import org.apache.log4j.BasicConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +21,6 @@ import org.slf4j.LoggerFactory;
 public class JavaGrepImp implements JavaGrep {
 
   final Logger logger = LoggerFactory.getLogger(JavaGrep.class);
-
   private String regex;
   private String rootPath;
   private String outFile;
@@ -32,17 +35,16 @@ public class JavaGrepImp implements JavaGrep {
    */
   @Override
   public void process() throws IOException {
-    //logger.debug("Process Starting: This is a logger debug message.");
-    List<File> fileList = listFiles(this.rootPath);
-    //logger.debug(fileList.toString());
+    //logger.debug(regex + " " + rootPath + " " + outFile);
+    Stream<File> fileStream = listFiles(this.rootPath);
 
-    ArrayList<String> matchedLines = new ArrayList<String>();
+    ArrayList<String> stringArrayList = new ArrayList<String>();
 
-    for (File file : fileList) {
-      matchedLines.addAll(readLines(file));
-    }
+    fileStream.forEach(file -> {
+      stringArrayList.addAll(readLines(file).collect(Collectors.toList()));
+    });
 
-    writeToFile(matchedLines);
+    writeToFile(stringArrayList.stream());
   }
 
   /**
@@ -55,24 +57,25 @@ public class JavaGrepImp implements JavaGrep {
    * @return return an ArrayList of all the files from the directory and subdirectories.
    */
   @Override
-  public List<File> listFiles(String rootDir) {
-    File rootDirectory = new File(rootDir);
-    File[] arrayOfFiles = rootDirectory.listFiles();
+  public Stream<File> listFiles(String rootDir) {
+    File directory = new File(rootDir);
+    File[] filesArray = directory.listFiles();
     ArrayList<File> fileArrayList = new ArrayList<File>();
 
-    if (arrayOfFiles == null) {
-      return fileArrayList;
+    if (filesArray == null) {
+      return Stream.empty();
     }
 
-    for (File file : arrayOfFiles) {
+    Stream.of(filesArray).forEach(file -> {
       if (file.isDirectory()) {
-        fileArrayList.addAll(listFiles(rootDir + "/" + file.getName()));
+        Stream<File> tempStream = listFiles(rootDir + "/" + file.getName());
+        fileArrayList.addAll(tempStream.collect(Collectors.toList()));
       } else {
         fileArrayList.add(file);
       }
-    }
+    });
 
-    return fileArrayList;
+    return fileArrayList.stream();
   }
 
   /**
@@ -83,27 +86,23 @@ public class JavaGrepImp implements JavaGrep {
    * @return Returns a String ArrayList of matched lines.
    */
   @Override
-  public List<String> readLines(File inputFile) {
-    //logger.debug("Reading File: " + inputFile.getName());
-    ArrayList<String> linesArrayList = new ArrayList<String>();
+  public Stream<String> readLines(File inputFile) {
+    //logger.debug("Path: " + inputFile.getPath());
+    ArrayList<String> matchedArrayList = new ArrayList<String>();
 
-    try {
-      BufferedReader bufferedReader = new BufferedReader(new FileReader(inputFile));
-      String readLine = bufferedReader.readLine();
+    try (Stream<String> lineStream = Files.lines(Paths.get(inputFile.getPath()))) {
 
-      while (readLine != null) {
-        if (containsPattern(readLine)) {
-          linesArrayList.add(inputFile.getName() + ":" + readLine);
+      lineStream.forEach(lineString -> {
+        if (containsPattern(lineString)) {
+          matchedArrayList.add(inputFile.getPath() + ":" + lineString);
         }
-        readLine = bufferedReader.readLine();
-      }
+      });
 
-      bufferedReader.close();
     } catch (IOException e) {
       throw new RuntimeException(e);
     }
 
-    return linesArrayList;
+    return matchedArrayList.stream();
   }
 
   /**
@@ -127,14 +126,18 @@ public class JavaGrepImp implements JavaGrep {
    * @throws IOException Throws IOException
    */
   @Override
-  public void writeToFile(List<String> lines) throws IOException {
+  public void writeToFile(Stream<String> lines) throws IOException {
     BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(this.outFile));
 
-    for (String str : lines) {
-      //logger.info(str);
-      bufferedWriter.write(str);
-      bufferedWriter.newLine();
-    }
+    lines.forEach(line -> {
+      try {
+        //logger.info(line);
+        bufferedWriter.write(line);
+        bufferedWriter.newLine();
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    });
 
     bufferedWriter.close();
   }
