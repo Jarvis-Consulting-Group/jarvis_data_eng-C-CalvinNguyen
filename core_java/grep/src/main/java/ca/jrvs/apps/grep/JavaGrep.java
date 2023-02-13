@@ -8,12 +8,14 @@ public interface JavaGrep {
 
   /**
    * Temporary Message
+   *
    * @throws IOException Throws IOException
    */
   void process() throws IOException;
 
   /**
    * Takes a root directory as a String, and returns a list of files within that directory.
+   *
    * @param rootDir takes the root directory as a String.
    * @return returns a list of files from the root directory
    */
@@ -21,6 +23,7 @@ public interface JavaGrep {
 
   /**
    * takes a File as an argument and returns a list of Strings (matching lines)
+   *
    * @param inputFile takes an input File as an argument
    * @return returns a list of Strings
    */
@@ -28,6 +31,7 @@ public interface JavaGrep {
 
   /**
    * Takes a line from the file as a String and returns a boolean whether it matches
+   *
    * @param line Takes each line of a file as a String
    * @return returns a boolean whether that line matches
    */
@@ -35,6 +39,7 @@ public interface JavaGrep {
 
   /**
    * Writes a list of strings that matched to an output file.
+   *
    * @param lines Gets a List of strings that matched
    * @throws IOException Throws IO Exception
    */
