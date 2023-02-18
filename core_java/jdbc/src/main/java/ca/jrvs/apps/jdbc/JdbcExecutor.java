@@ -33,9 +33,16 @@ public class JdbcExecutor {
     try {
       Connection connection = dcm.getConnection();
       CustomerDao customerDao = new CustomerDao(connection);
-      Customer customer = customerDao.findById(1000);
+      Customer customer = customerDao.findById(10000);
 
-      jdbcExecutor.logger.info(customer.getFirstName() + " " + customer.getLastName());
+      jdbcExecutor.logger.info(customer.getFirstName() + " " + customer.getLastName() + " "
+          + customer.getEmail());
+
+      customer.setEmail("gwashington@wh.gov");
+      customer = customerDao.update(customer);
+
+      jdbcExecutor.logger.info(customer.getFirstName() + " " + customer.getLastName() + " "
+          + customer.getEmail());
     } catch (SQLException e) {
       jdbcExecutor.logger.error("Error: SQLException: ", e);
     }
