@@ -32,6 +32,13 @@ public class JdbcExecutor {
 
     try {
       Connection connection = dcm.getConnection();
+      OrderDao orderDao = new OrderDao(connection);
+      Order dbOrder = orderDao.findById(1000);
+
+      jdbcExecutor.logger.info(dbOrder.toString());
+
+      /*
+
       CustomerDao customerDao = new CustomerDao(connection);
       Customer customer = new Customer();
       customer.setFirstName("John");
@@ -51,6 +58,8 @@ public class JdbcExecutor {
       dbCustomer = customerDao.update(dbCustomer);
       jdbcExecutor.logger.info(dbCustomer.toString());
       customerDao.delete(dbCustomer.getId());
+
+       */
     } catch (SQLException e) {
       jdbcExecutor.logger.error("Error: SQLException: ", e);
     }
