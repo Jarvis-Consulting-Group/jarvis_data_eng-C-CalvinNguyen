@@ -3,7 +3,7 @@
 ## Introduction
 The Java Grep app replicates the egrep Linux command with the recursive option so that it reads all 
 subdirectories and files. Lastly, it includes the redirection operator, so the output is written to 
-a file (egrep -r [regex/pattern] [sourceFile] > [targetFile]). To app was developed using the IDE, 
+a file (egrep -r [regex/pattern] [sourceFile] > [targetFile]). The app was developed using the IDE, 
 IntelliJ IDEA, which includes features for building Java applications with Maven. Java.io 
 (core java package) was used to read and write to files (Buffered Reader/Writer), Stream API, and 
 Lambda functions iterated through directories, lines from a file, or a string stream to write lines 
