@@ -6,7 +6,7 @@ I am a dedicated team player who is inquisitive, punctual, and goes by the book.
 
 **Proficient:** JavaScript, Angular/React, NodeJS, Git, RDBMS/SQL
 
-**Competent:** Java, Spring, Docker, Python, Agile/Scrum, REST APIs, HTML/CSS
+**Competent:** Java, Maven, Spring, Docker, Python, Agile/Scrum, REST APIs, HTML/CSS
 
 **Familiar:** Linux/Bash, C#, ASP.NET, PHP, Swift
 
@@ -22,7 +22,7 @@ Project source code: [https://github.com/Jarvis-Consulting-Group/jarvis_data_eng
 **Core Java Apps** [[GitHub](https://github.com/Jarvis-Consulting-Group/jarvis_data_eng-C-CalvinNguyen/tree/master/core_java)]:
       
   - Twitter App: 
-  - JDBC App: 
+  - JDBC App: Familiarize ourselves with design patterns like Data Access Object and Repository patterns while building an application that uses the Core Java JDBC API to perform CRUD (CREATE, READ, UPDATE, and DELETE) operations on an existing dataset within a database. Used the JDBC API within the java application; the JDBC API consists of two packages (java.sql and javax.sql) for operating with a database when used in conjunction with a JDBC driver. Maven managed the application's dependencies, like the specific JDBC driver that acts as a layer between the application using JDBC methods and the PostgreSQL database. The PostgreSQL database was deployed on a Docker container using the Postgres base image from Docker Hub, and the psql command inserted the data set into the database. Testing the application involved using the SLF4J logger to display records when retrieving data from the database and confirming database changes by accessing it from a terminal using psql.
   - Grep App: Designed the Java Grep app to replicate the egrep Linux command with the recursive option enabled so that it reads all files within the directory or subdirectory and includes a redirection operator to write matched lines to a file (egrep -r [regex/pattern] [sourceFile] > [targetFile]). Implementation involved using core Java packages like stream API and lambda functions to iterate through directories, lines from a file or a string stream, and java.io, which reads and writes text data from or to the files. Maven builds the project, packages it into a JAR file, and manages dependencies like SLF4J. Debug logging used SLF4J, and unit testing used JUnit4, which aided in manually testing the app by displaying files and matched lines. For deploying, we created a docker image using a Dockerfile, distributed it onto the Docker hub, and ran it on a docker container.
 
 
