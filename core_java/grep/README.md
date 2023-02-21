@@ -52,7 +52,7 @@ into a file)
 
 There may be issues with the Java Heap and throwing OutOfMemoryExceptions when the java heap is 
 too small for a large file. For example, we tested it by setting the Java Heap to 5MB, and the 
-Shakespeare.txt file was 5.2-5.5MB, and it should throw the OutOfMemoryExceptionwhen reading the 
+Shakespeare.txt file was 5.2-5.5MB, and it should throw the OutOfMemoryException when reading the 
 file. To fix this, we can parse the file in chunks using Streams and BufferedReader with a 
 specific buffer size.
 
