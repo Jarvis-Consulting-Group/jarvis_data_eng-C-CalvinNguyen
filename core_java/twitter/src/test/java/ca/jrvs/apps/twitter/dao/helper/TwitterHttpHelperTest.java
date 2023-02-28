@@ -75,7 +75,7 @@ public class TwitterHttpHelperTest {
     HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
         TOKEN_SECRET);
 
-    String tweetId = "1630608185227608066";
+    String tweetId = "1629865830337990656";
     PercentEscaper percentEscaper = new PercentEscaper("", false);
     URI uri = new URI("https://api.twitter.com/2/tweets/"
         + percentEscaper.escape(tweetId)
