@@ -35,6 +35,7 @@ public class TwitterHttpHelperTest {
 
   }
 
+  // Worked 1630595194751000578
   @Test
   public void httpPostV2() throws Exception{
     HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
@@ -74,11 +75,11 @@ public class TwitterHttpHelperTest {
     HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
         TOKEN_SECRET);
 
-    String tweetId = "1629865830337990656";
+    String tweetId = "1630608185227608066";
     PercentEscaper percentEscaper = new PercentEscaper("", false);
-    URI uri = new URI("https://api.twitter.com/2/users/"
+    URI uri = new URI("https://api.twitter.com/2/tweets/"
         + percentEscaper.escape(tweetId)
-        + "/tweets?tweet.fields=created_at,entities,public_metrics,geo&expansions=geo.place_id");
+        + "?tweet.fields=created_at,entities,public_metrics,geo&expansions=geo.place_id");
 
     HttpResponse httpResponse = httpHelper.httpGet(uri);
     logger.info(EntityUtils.toString(httpResponse.getEntity()));
@@ -100,12 +101,13 @@ public class TwitterHttpHelperTest {
     logger.info(EntityUtils.toString(httpResponse.getEntity()));
   }
 
+  // Working
   @Test
   public void httpDeleteV2() throws Exception{
     HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
         TOKEN_SECRET);
 
-    String tweetId = "";
+    String tweetId = "1630595194751000578";
     PercentEscaper percentEscaper = new PercentEscaper("", false);
     // Temporary URI
     URI uri = new URI("https://api.twitter.com/2/tweets/" + percentEscaper.escape(tweetId));

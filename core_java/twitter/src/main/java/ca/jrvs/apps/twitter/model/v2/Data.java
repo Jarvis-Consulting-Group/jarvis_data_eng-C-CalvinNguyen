@@ -1,10 +1,8 @@
 package ca.jrvs.apps.twitter.model.v2;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -12,13 +10,13 @@ import java.util.List;
 })
 public class Data {
   @JsonProperty("data")
-  private Tweet tweet;
+  private TweetV2 tweetV2;
 
-  public Tweet getTweet() {
-    return tweet;
+  public TweetV2 getTweet() {
+    return tweetV2;
   }
 
-  public void setTweets(Tweet tweet) {
-    this.tweet = tweet;
+  public void setTweets(TweetV2 tweetV2) {
+    this.tweetV2 = tweetV2;
   }
 }

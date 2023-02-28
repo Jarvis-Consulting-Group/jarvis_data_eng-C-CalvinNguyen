@@ -3,7 +3,7 @@ package ca.jrvs.apps.twitter.model.v2;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Mentions {
+public class MentionsV2 {
 
   private int start;
   private int end;

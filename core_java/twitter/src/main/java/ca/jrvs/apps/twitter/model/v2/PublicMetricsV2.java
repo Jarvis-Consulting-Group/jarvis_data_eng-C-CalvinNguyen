@@ -3,7 +3,7 @@ package ca.jrvs.apps.twitter.model.v2;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PublicMetrics {
+public class PublicMetricsV2 {
 
   private int retweet_count;
   private int reply_count;

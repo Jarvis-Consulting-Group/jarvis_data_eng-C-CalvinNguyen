@@ -14,4 +14,5 @@ public interface HttpHelper {
   HttpResponse httpDelete(URI uri);
 
   HttpResponse httpDeleteV2(URI uri);
+
 }
