@@ -34,6 +34,15 @@
       "description": "Familiarize ourselves with concepts of relational databases, relational database management systems, structured query language, optimizations, and data models. To grasp these concepts, I worked on manipulating existing data using an IDE called pgAdmin and manually compared my query results with the expected results given. The file clubdata.sql, which contained the existing data, was inserted into a PostgreSQL database deployed within a Docker container.",
       "git_url": "/sql",
       "name": "SQL: Manipulate an Existing Database"
+    },
+    {
+      "description": [
+        "Twitter App: Allows us to perform operations that manage tweets; the Core Java Twitter App lets us post, find, and delete tweets all within a command line interface. The program follows the model-view-controller architecture design, the controller/service handles inputs and business logic, the model manages objects and data retrieved from the Twitter API, and the view prints out a tweet in a JSON format. To implement these designs, we used technologies such as Twitter RESTful API V2 that utilizes HTTP methods to perform the operations on the Twitter servers. Maven is another technology that handles the project's dependencies like the Apache HttpClient package that allows the app to send HTTP requests, the OAuth signpost package that enables the app to add OAuth authentication to the requests, and the fasterXML Jackson Core package that maps JSON properties to the tweet object. Integration and unit testing were utilized with the libraries Mockito and JUnit4 to test the application. Lastly, the Twitter app was deployed within a Docker container with Twitter API OAuth keys set as environment variables within the Docker container.",
+        "JDBC App: Familiarize ourselves with design patterns like Data Access Object and Repository patterns while building an application that uses the Core Java JDBC API to perform CRUD (CREATE, READ, UPDATE, and DELETE) operations on an existing dataset within a database. Used the JDBC API within the java application; the JDBC API consists of two packages (java.sql and javax.sql) for operating with a database when used in conjunction with a JDBC driver. Maven managed the application's dependencies, like the specific JDBC driver that acts as a layer between the application using JDBC methods and the PostgreSQL database. The PostgreSQL database was deployed on a Docker container using the Postgres base image from Docker Hub, and the psql command inserted the data set into the database. Testing the application involved using the SLF4J logger to display records when retrieving data from the database and confirming database changes by accessing it from a terminal using psql.",
+        "Grep App: Designed the Java Grep app to replicate the egrep Linux command with the recursive option enabled so that it reads all files within the directory or subdirectory and includes a redirection operator to write matched lines to a file (egrep -r [regex/pattern] [sourceFile] \u003e [targetFile]). Implementation involved using core Java packages like stream API and lambda functions to iterate through directories, lines from a file or a string stream, and java.io, which reads and writes text data from or to the files. Maven builds the project, packages it into a JAR file, and manages dependencies like SLF4J. Debug logging used SLF4J, and unit testing used JUnit4, which aided in manually testing the app by displaying files and matched lines. For deploying, we created a docker image using a Dockerfile, distributed it onto the Docker hub, and ran it on a docker container."
+      ],
+      "git_url": "/core_java",
+      "name": "Core Java Apps"
     }
   ],
   "name": "Chi Calvin Nguyen",
@@ -63,7 +72,6 @@
   ],
   "skills": {
     "competent": [
-      "Java",
       "Spring",
       "Docker",
       "Python",
@@ -82,9 +90,11 @@
       "JavaScript",
       "Angular/React",
       "NodeJS",
+      "Java",
+      "Maven",
       "Git",
       "RDBMS/SQL"
     ]
   },
-  "summary": "I am a dedicated team player who is inquisitive, punctual, and goes by the book. I recently graduated with an Ontario College Advanced Diploma from the Computer Programming \u0026 Analysis program at George Brown College. During my time at George Brown, I've learned technologies such as React, Node.js, Angular, MongoDB, Spring, and ASP.NET by building projects like a front-end application that connects to an open-source weather API or full-stack applications where we built both the front and backend while following Agile project management methodology. I've also gained other skills outside George Brown that are crucial to a workplace. My ability to communicate and act as a team player established itself throughout my time as a bartender/server. I worked in a rough fast-paced environment that required me to be on my toes, give the best possible service to customers, and work within a tight-knit team. I am quite a hobbyist with hobbies such as brewing beer, where I experiment with recipes to get the best possible batch, which is why I also like tech because I constantly learn, test, and create software. Overall, I'm hoping for an opportunity in the software development industry where I can prove myself as a team member."
+  "summary": "I am a dedicated team player who is inquisitive, punctual, and goes by the book. I recently graduated with an Ontario College Advanced Diploma from the Computer Programming \u0026 Analysis program at George Brown College. During my time at George Brown, I've learned technologies such as React, Node.js, Angular, MongoDB, Spring, and ASP.NET by building projects like a front-end application that connects to an open-source weather API or full-stack applications where we built both the front and backend while following the Agile project management methodology. I've also gained other skills outside George Brown that are crucial to a workplace. My ability to communicate and act as a team player established itself throughout my time as a bartender/server. I worked in a rough fast-paced environment that required me to be on my toes, give the best possible service to customers, and work within a tight-knit team. I am quite a hobbyist with hobbies such as brewing beer, where I experiment with recipes to get the best possible batch, which is why I also like tech because I constantly learn, test, and create software. Overall, I'm hoping for an opportunity in the software development industry where I can prove myself as a team member."
 }
