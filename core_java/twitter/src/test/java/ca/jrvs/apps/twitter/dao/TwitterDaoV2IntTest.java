@@ -1,21 +1,19 @@
 package ca.jrvs.apps.twitter.dao;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
 
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
-import ca.jrvs.apps.twitter.model.v1.Tweet;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TwitterDaoIntTest {
+public class TwitterDaoV2IntTest {
 
-  private static final Logger logger = LoggerFactory.getLogger(TwitterDaoIntTest.class);
-  private TwitterDao twitterDao;
+  private static final Logger logger = LoggerFactory.getLogger(TwitterDaoV2IntTest.class);
+  private TwitterDaoV2 twitterDaoV2;
 
   @Before
   public void setUp() throws Exception {
@@ -25,40 +23,38 @@ public class TwitterDaoIntTest {
     String TOKEN_SECRET = System.getenv("tokenSecret");
 
     HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, TOKEN_SECRET);
-    twitterDao = new TwitterDao(httpHelper);
+    twitterDaoV2 = new TwitterDaoV2(httpHelper);
   }
 
   @Test
   public void create() {
-    Tweet tweet = new Tweet();
+    TweetV2 tweetV2 = new TweetV2();
 
-    tweet.setText("Hello World!");
+    tweetV2.setText("Hello World!");
 
-    Tweet responseTweet = twitterDao.create(tweet);
-    logger.info(responseTweet.toString());
-    assertEquals(tweet.getText(), responseTweet.getText());
+    TweetV2 responseTweetV2 = twitterDaoV2.create(tweetV2);
+    logger.info(responseTweetV2.toString());
+    assertEquals(tweetV2.getText(), responseTweetV2.getText());
   }
 
   @Test
   public void findById() {
-
     String text = "@HotForMoot Hey @HotForMoot \uD83D\uDC4B, we've been hard at work developing our new free &amp; basic API tiers. We'll get back to you following the launch. \n"
         + "\n"
         + "Hint: it's coming very soon!";
     String id = "1629865830337990656";
 
-    Tweet tweet = twitterDao.findById(id);
-    logger.info(tweet.toString());
-    assertEquals(text, tweet.getText());
-    assertEquals(id, tweet.getId_str());
+    TweetV2 tweetV2 = twitterDaoV2.findById(id);
+    logger.info(tweetV2.toString());
+    assertEquals(text, tweetV2.getText());
+    assertEquals(id, tweetV2.getId());
   }
 
   @Test
   public void deleteById() {
     String id = "1630608185227608066";
 
-    Tweet tweet = twitterDao.deleteById(id);
-    assertEquals("Hello World!", tweet.getText());
-    assertEquals(id, tweet.getId_str());
+    TweetV2 tweetV2 = twitterDaoV2.deleteById(id);
+    assertNull(tweetV2);
   }
 }

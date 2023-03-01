@@ -1,102 +1,95 @@
 package ca.jrvs.apps.twitter.dao;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.isNotNull;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import ca.jrvs.apps.twitter.JsonUtil;
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
-import ca.jrvs.apps.twitter.model.v1.Tweet;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
 import java.io.IOException;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@RunWith(MockitoJUnitRunner.class)
-public class TwitterDaoUnitTest {
+public class TwitterDaoV2UnitTest {
 
-  private static final Logger logger = LoggerFactory.getLogger(TwitterDaoUnitTest.class);
+  private static final Logger logger = LoggerFactory.getLogger(TwitterDaoV2UnitTest.class);
 
   @Mock
   HttpHelper mockHelper;
 
   @InjectMocks
-  TwitterDao twitterDao;
+  TwitterDaoV2 twitterDaoV2;
 
   @Test
   public void showTweet() throws Exception {
+
     when(mockHelper.httpGet(isNotNull())).thenThrow(new RuntimeException("mock"));
     try {
-      twitterDao.findById("1629865830337990656");
+      twitterDaoV2.findById("1629865830337990656");
       fail();
     } catch (RuntimeException e) {
       assertTrue(true);
     }
 
     when(mockHelper.httpGet(isNotNull())).thenReturn(null);
-    TwitterDao spyDao = Mockito.spy(twitterDao);
+    TwitterDaoV2 spyDao = Mockito.spy(twitterDaoV2);
     TweetV2 expectedTweet = JsonUtil.toObjectFromJson(testStr2, TweetV2.class);
 
-    doReturn(expectedTweet).when(spyDao).checkResponse(any(), anyInt());
-    Tweet tweet = spyDao.findById("1629865830337990656");
-    assertNotNull(tweet);
-    assertNotNull(tweet.getText());
+    doReturn(expectedTweet).when(spyDao).checkResponseV2(any(), anyInt());
+    TweetV2 tweetV2 = spyDao.findById("1629865830337990656");
+    assertNotNull(tweetV2);
+    assertNotNull(tweetV2.getText());
   }
 
   @Test
   public void postTweet() throws IOException {
-    Tweet tempTweet = new Tweet();
+
+    TweetV2 tempTweet = new TweetV2();
     tempTweet.setText("Hello World!");
 
     when(mockHelper.httpPostV2(isNotNull(), isNotNull())).thenThrow(new RuntimeException("mock"));
     try {
-      twitterDao.create(tempTweet);
+      twitterDaoV2.create(tempTweet);
       fail();
     } catch (RuntimeException e) {
       assertTrue(true);
     }
 
     when(mockHelper.httpPostV2(isNotNull(), isNotNull())).thenReturn(null);
-    TwitterDao spyDao = Mockito.spy(twitterDao);
-    Tweet expectedTweet = JsonUtil.toObjectFromJson(testStr2, Tweet.class);
-    doReturn(expectedTweet).when(spyDao).checkResponse(any(), anyInt());
-    Tweet tweet = spyDao.create(tempTweet);
-    logger.info(tweet.toString());
-    assertNotNull(tweet);
-    assertNotNull(tweet.getText());
+    TwitterDaoV2 spyDao = Mockito.spy(twitterDaoV2);
+    TweetV2 expectedTweet = JsonUtil.toObjectFromJson(testStr2, TweetV2.class);
+    doReturn(expectedTweet).when(spyDao).checkResponseV2(any(), anyInt());
+    TweetV2 tweetV2 = spyDao.create(tempTweet);
+    logger.info(tweetV2.toString());
+    assertNotNull(tweetV2);
+    assertNotNull(tweetV2.getText());
   }
 
   @Test
   public void deleteTweet() throws IOException {
+
     String id = "1629865830337990656";
 
     when(mockHelper.httpDeleteV2(isNotNull())).thenThrow(new RuntimeException("mock"));
     try {
-      twitterDao.deleteById(id);
+      twitterDaoV2.deleteById(id);
       fail();
     } catch (RuntimeException e) {
       assertTrue(true);
     }
 
     when(mockHelper.httpDeleteV2(isNotNull())).thenReturn(null);
-    TwitterDao spyDao = Mockito.spy(twitterDao);
-    Tweet expectedTweet = JsonUtil.toObjectFromJson(testStr2, Tweet.class);
-    doReturn(expectedTweet).when(spyDao).checkResponse(any(), anyInt());
-    Tweet tweet = spyDao.deleteById(id);
-    assertNotNull(tweet);
+    TwitterDaoV2 spyDao = Mockito.spy(twitterDaoV2);
+    TweetV2 tweetV2 = spyDao.deleteById(id);
+    assertNull(tweetV2);
   }
 
   private static final String testStr2 = "{\n"
