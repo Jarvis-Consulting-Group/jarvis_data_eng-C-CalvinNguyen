@@ -40,7 +40,7 @@ public class TwitterDaoUnitTest {
 
     when(mockHelper.httpGet(isNotNull())).thenThrow(new RuntimeException("mock"));
     try {
-      twitterDao.findByIdV2("1629865830337990656");
+      twitterDao.findById("1629865830337990656");
       fail();
     } catch (RuntimeException e) {
       assertTrue(true);
@@ -89,7 +89,7 @@ public class TwitterDaoUnitTest {
 
     when(mockHelper.httpDeleteV2(isNotNull())).thenThrow(new RuntimeException("mock"));
     try {
-      twitterDao.deleteByIdV2(id);
+      twitterDao.deleteById(id);
       fail();
     } catch (RuntimeException e) {
       assertTrue(true);

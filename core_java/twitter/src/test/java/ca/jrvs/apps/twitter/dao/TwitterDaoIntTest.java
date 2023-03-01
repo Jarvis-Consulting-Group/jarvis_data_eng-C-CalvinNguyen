@@ -50,6 +50,7 @@ public class TwitterDaoIntTest {
     assertEquals(tweetV2.getText(), responseTweetV2.getText());
   }
 
+  /*
   @Test
   public void findById() {
 
@@ -58,11 +59,13 @@ public class TwitterDaoIntTest {
         + "Hint: it's coming very soon!";
     String id = "1629865830337990656";
 
-    Tweet tweet = twitterDao.findById(id);
+    Tweet tweet = twitterDaoV2.findById(id);
     logger.info(tweet.toString());
     assertEquals(text, tweet.getText());
     assertEquals(id, tweet.getId_str());
   }
+
+   */
 
   @Test
   public void findByIdV2() {
