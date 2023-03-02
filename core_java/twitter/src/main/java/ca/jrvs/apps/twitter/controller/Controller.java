@@ -1,14 +1,12 @@
 package ca.jrvs.apps.twitter.controller;
 
-public interface Controller {
+import java.util.List;
 
-  /*
-  Tweet postTweet(String[] args);
+public interface Controller<T> {
 
-  Tweet showTweet(String[] args);
+  T postTweet(String[] args);
 
-  List<Tweet> deleteTweet(String[] args);
+  T showTweet(String[] args);
 
-   */
-
+  List<T> deleteTweet(String[] args);
 }

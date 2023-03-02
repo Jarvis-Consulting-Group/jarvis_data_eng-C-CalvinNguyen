@@ -16,6 +16,8 @@ public class TweetV2 {
   private EntitiesV2 entitiesV2;
   private PublicMetricsV2 public_metrics;
 
+  private boolean deleted = false;
+
   public String getId() {
     return id;
   }
@@ -56,6 +58,14 @@ public class TweetV2 {
     this.public_metrics = public_metrics;
   }
 
+  public boolean isDeleted() {
+    return deleted;
+  }
+
+  public void setDeleted(boolean deleted) {
+    this.deleted = deleted;
+  }
+
   @Override
   public String toString() {
     return "Tweet{" + "\n"
@@ -64,6 +74,7 @@ public class TweetV2 {
         + ", created_at=" + created_at + "\n"
         + ", entities=" + entitiesV2 + "\n"
         + ", public_metrics=" + public_metrics + "\n"
+        + ", deleted=" + deleted + "\n"
         + '}';
   }
 }

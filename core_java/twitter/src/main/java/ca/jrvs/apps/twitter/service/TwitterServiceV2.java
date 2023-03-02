@@ -103,7 +103,7 @@ public class TwitterServiceV2 implements Service<TweetV2> {
     try {
       long longId = Long.parseLong(id);
       if (longId < 0) {
-        throw new IllegalArgumentException("Invalid ID");
+        throw new IllegalArgumentException("Invalid ID (Must be positive)");
       }
 
     } catch (IllegalArgumentException e) {
@@ -129,7 +129,9 @@ public class TwitterServiceV2 implements Service<TweetV2> {
     List<TweetV2> tweetV2List = new ArrayList<>();
 
     for (String id : ids) {
-      tweetV2List.add((TweetV2) dao.deleteById(id));
+      TweetV2 returnTweet = (TweetV2) dao.deleteById(id);
+      returnTweet.setId(id);
+      tweetV2List.add(returnTweet);
     }
 
     return tweetV2List;

@@ -143,15 +143,11 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
 
       // Does not return deleted tweet object, returns {data: {deleted:true}}
       HttpResponse httpResponse = httpHelper.httpDeleteV2(uriv2);
-      /*
-      logger.debug("Status Code: " + httpResponse.getStatusLine().getStatusCode()
-          + " " + httpResponse.getStatusLine().getReasonPhrase());
 
-       */
-      //tweetV2 = checkResponseV2(httpResponse, HTTP_OK);
+      tweetV2 = checkResponseV2(httpResponse, HTTP_OK);
       return tweetV2;
 
-    } catch (URISyntaxException e) {
+    } catch (URISyntaxException | IOException e) {
       throw new RuntimeException(e);
     }
   }
