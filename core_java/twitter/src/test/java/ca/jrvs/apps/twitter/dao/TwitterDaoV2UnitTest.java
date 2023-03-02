@@ -12,12 +12,15 @@ import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
 import java.io.IOException;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@RunWith(MockitoJUnitRunner.class)
 public class TwitterDaoV2UnitTest {
 
   private static final Logger logger = LoggerFactory.getLogger(TwitterDaoV2UnitTest.class);
