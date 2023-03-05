@@ -1,14 +1,7 @@
 package ca.jrvs.apps.twitter;
 
 import ca.jrvs.apps.twitter.controller.Controller;
-import ca.jrvs.apps.twitter.controller.TwitterControllerV2;
-import ca.jrvs.apps.twitter.dao.CrdDao;
-import ca.jrvs.apps.twitter.dao.TwitterDaoV2;
-import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
-import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
-import ca.jrvs.apps.twitter.service.Service;
-import ca.jrvs.apps.twitter.service.TwitterServiceV2;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.List;
 
@@ -18,7 +11,7 @@ import java.util.List;
  */
 public class TwitterCliApp {
 
-  private Controller controller;
+  private final Controller controller;
 
   // Message to be presented if the arguments are illegal.
   private static final String USAGE = "USAGE: \n"
@@ -28,6 +21,7 @@ public class TwitterCliApp {
 
   /**
    * Constructor that takes the controller object/dependency used by the application.
+   *
    * @param controller Controller dependency passed in the constructor.
    */
   public TwitterCliApp(Controller controller) {
@@ -35,7 +29,9 @@ public class TwitterCliApp {
   }
 
   /**
-   * Calls a specific method from the controller based on the arguments passed or throws an exception.
+   * Calls a specific method from the controller based on the arguments passed or throws an
+   * exception.
+   *
    * @param args String array of arguments passed when calling the application.
    */
   public void run(String[] args) {
@@ -66,7 +62,9 @@ public class TwitterCliApp {
   }
 
   /**
-   * prints the returned Tweet object as a JSON string by calling the JsonUtil.toJson static method.
+   * prints the returned Tweet object as a JSON string by calling the JsonUtil.toJson static
+   * method.
+   *
    * @param tweetV2 the TweetV2 object returned from the controller.
    * @param nullVal boolean value on whether to include the null values or not.
    */
@@ -98,7 +96,6 @@ public class TwitterCliApp {
 
     twitterCliApp.run(args);
   }
-
    */
 
 }
