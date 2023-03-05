@@ -5,10 +5,17 @@ import ca.jrvs.apps.twitter.model.v2.TweetV2;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The implementation of the service interface that sets the generic type as the TweetV2 object.
+ */
 public class TwitterServiceV2 implements Service<TweetV2> {
 
   private CrdDao dao;
 
+  /**
+   * Constructor that takes the DAO object dependency.
+   * @param dao DAO object dependency that will be used.
+   */
   public TwitterServiceV2(CrdDao dao) {
     this.dao = dao;
   }
@@ -22,6 +29,11 @@ public class TwitterServiceV2 implements Service<TweetV2> {
     return (TweetV2) dao.create(tweet);
   }
 
+  /**
+   * Validates the TweetV2 object from the postTweet arguments, it checks if the String is less or
+   * equals to 140 characters.
+   * @param tweet the TweetV2 object passed from the postTweet object.
+   */
   private void validatePostTweet(TweetV2 tweet) {
 
     if (tweet.getText().length() > 140) {
@@ -52,7 +64,7 @@ public class TwitterServiceV2 implements Service<TweetV2> {
             returnTweet.setEntities(responseTweet.getEntities());
             break;
           case "public_metrics":
-            returnTweet.setPublic_metrics(responseTweet.getPublic_metrics());
+            returnTweet.setPublicMetrics(responseTweet.getPublicMetrics());
             break;
           default:
             break;
@@ -63,6 +75,13 @@ public class TwitterServiceV2 implements Service<TweetV2> {
     return returnTweet;
   }
 
+  /**
+   * Validates the inputs from the showTweet method, it checks if the ID is valid and if the passed
+   * String array fields is valid.
+   * @param id the passed ID of a Tweet as a String, it can only be numerical and a 64-bit positive
+   * integer.
+   * @param fields the passed String array of fields, validates if they match the appropriate cases.
+   */
   private void validateShowTweet(String id, String[] fields) {
 
     // Validate id
@@ -91,6 +110,10 @@ public class TwitterServiceV2 implements Service<TweetV2> {
     }
   }
 
+  /**
+   * Checks if the passed tweet ID as a String is numerical and a 64-bit positive integer.
+   * @param id ID string passed from the validateShowTweet or validateDeleteTweet.
+   */
   private void checkId(String id) {
 
     // checks if ID is all digits using regex
@@ -103,7 +126,7 @@ public class TwitterServiceV2 implements Service<TweetV2> {
     try {
       long longId = Long.parseLong(id);
       if (longId < 0) {
-        throw new IllegalArgumentException("Invalid ID");
+        throw new IllegalArgumentException("Invalid ID (Must be positive)");
       }
 
     } catch (IllegalArgumentException e) {
@@ -124,17 +147,29 @@ public class TwitterServiceV2 implements Service<TweetV2> {
     
   }
 
+  /**
+   * Calls to delete each TweetV2 object using the DAO.
+   * @param ids String array of IDs.
+   * @return returns the list of deleted tweets objects.
+   */
   private List<TweetV2> deleteTweetList(String[] ids) {
 
     List<TweetV2> tweetV2List = new ArrayList<>();
 
     for (String id : ids) {
-      tweetV2List.add((TweetV2) dao.deleteById(id));
+      TweetV2 returnTweet = (TweetV2) dao.deleteById(id);
+      returnTweet.setId(id);
+      tweetV2List.add(returnTweet);
     }
 
     return tweetV2List;
   }
 
+  /**
+   * Validates whether each ID within the string array ids is valid (numerical and 64-bit positive
+   * integer).
+   * @param ids the passed String array of ids.
+   */
   private void validateDeleteTweet(String[] ids) {
     for (String id : ids) {
       // For each tweet call checkId(id), if it isn't valid throws IllegalArgumentException

@@ -1,13 +1,11 @@
 package ca.jrvs.apps.twitter.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.dao.TwitterDaoV2;
-import ca.jrvs.apps.twitter.dao.TwitterDaoV2IntTest;
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
-import ca.jrvs.apps.twitter.model.v1.Tweet;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
 import org.junit.Before;
 import org.junit.Test;

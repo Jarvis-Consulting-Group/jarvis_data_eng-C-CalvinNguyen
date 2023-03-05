@@ -52,9 +52,10 @@ public class TwitterDaoV2IntTest {
 
   @Test
   public void deleteById() {
-    String id = "1630608185227608066";
+    String id = "1631343910608936978";
 
     TweetV2 tweetV2 = twitterDaoV2.deleteById(id);
-    assertNull(tweetV2);
+    logger.info(tweetV2.toString());
+    assertNotNull(tweetV2);
   }
 }

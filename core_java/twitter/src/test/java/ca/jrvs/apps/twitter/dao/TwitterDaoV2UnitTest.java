@@ -48,6 +48,7 @@ public class TwitterDaoV2UnitTest {
 
     doReturn(expectedTweet).when(spyDao).checkResponseV2(any(), anyInt());
     TweetV2 tweetV2 = spyDao.findById("1629865830337990656");
+
     assertNotNull(tweetV2);
     assertNotNull(tweetV2.getText());
   }
@@ -69,8 +70,10 @@ public class TwitterDaoV2UnitTest {
     when(mockHelper.httpPostV2(isNotNull(), isNotNull())).thenReturn(null);
     TwitterDaoV2 spyDao = Mockito.spy(twitterDaoV2);
     TweetV2 expectedTweet = JsonUtil.toObjectFromJson(testStr2, TweetV2.class);
+
     doReturn(expectedTweet).when(spyDao).checkResponseV2(any(), anyInt());
     TweetV2 tweetV2 = spyDao.create(tempTweet);
+
     logger.info(tweetV2.toString());
     assertNotNull(tweetV2);
     assertNotNull(tweetV2.getText());
@@ -92,6 +95,7 @@ public class TwitterDaoV2UnitTest {
     when(mockHelper.httpDeleteV2(isNotNull())).thenReturn(null);
     TwitterDaoV2 spyDao = Mockito.spy(twitterDaoV2);
     TweetV2 tweetV2 = spyDao.deleteById(id);
+
     assertNull(tweetV2);
   }
 
