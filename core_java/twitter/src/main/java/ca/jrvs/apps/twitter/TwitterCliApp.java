@@ -39,6 +39,10 @@ public class TwitterCliApp {
    * @param args String array of arguments passed when calling the application.
    */
   public void run(String[] args) {
+    if (args.length > 3 || args.length <= 1) {
+      throw new IllegalArgumentException(USAGE);
+    }
+
     switch (args[0]) {
       case "post":
 
@@ -74,10 +78,7 @@ public class TwitterCliApp {
     }
   }
 
-  /**
-   * main method that sets up the dependencies and calls the run method.
-   * @param args String array of arguments to control the application.
-   */
+  /*
   public static void main(String[] args) {
     if (args.length > 3 || args.length <= 1) {
       throw new IllegalArgumentException(USAGE);
@@ -97,5 +98,7 @@ public class TwitterCliApp {
 
     twitterCliApp.run(args);
   }
+
+   */
 
 }

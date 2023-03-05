@@ -10,11 +10,14 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * TwitterDaoV2 is the implementation of CrdDao for TweetV2 (specific to API V2) and Strings,
  * it will create, get, delete TweetV2 objects from the API using the HttpHelper (TwitterHttpHelper).
  */
+@Component
 public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
 
   // URI Constants
@@ -39,6 +42,7 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
    * Constructor with the passed HttpHelper object dependency.
    * @param httpHelper the HttpHelper dependency that the DAO will call.
    */
+  @Autowired
   public TwitterDaoV2(HttpHelper httpHelper) {
     this.httpHelper = httpHelper;
   }

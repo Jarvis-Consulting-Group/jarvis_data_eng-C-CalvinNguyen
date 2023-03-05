@@ -35,10 +35,7 @@ public class TwitterControllerV2UnitTest {
     String[] testArr = {"post", "test", null};
     TweetV2 tempTweet = new TweetV2();
     tempTweet.setText("test");
-
-    when(service.postTweet(any())).thenReturn(new TweetV2());
     TwitterControllerV2 spyController = Mockito.spy(twitterControllerV2);
-
     doReturn(tempTweet).when(spyController).postTweet(any());
     TweetV2 tweetV2 = spyController.postTweet(testArr);
     logger.info(tweetV2.toString());
@@ -48,10 +45,7 @@ public class TwitterControllerV2UnitTest {
   public void showTweet() throws Exception{
     String[] testArr = {"show", "1629865830337990656", null};
     TweetV2 tempTweet = JsonUtil.toObjectFromJson(testStr2, TweetV2.class);
-
-    when(service.showTweet(any(), any())).thenReturn(new TweetV2());
     TwitterControllerV2 spyController = Mockito.spy(twitterControllerV2);
-
     doReturn(tempTweet).when(spyController).showTweet(any());
     TweetV2 tweetV2 = spyController.showTweet(testArr);
     logger.info(tweetV2.toString());
@@ -65,10 +59,7 @@ public class TwitterControllerV2UnitTest {
     tempTweet.setDeleted(true);
     List<TweetV2> tempList = new ArrayList<TweetV2>();
     tempList.add(tempTweet);
-
-    when(service.deleteTweets(any())).thenReturn(new ArrayList<TweetV2>());
     TwitterControllerV2 spyController = Mockito.spy(twitterControllerV2);
-
     doReturn(tempList).when(spyController).deleteTweet(any());
     List<TweetV2> tweetV2List = spyController.deleteTweet(testArr);
     logger.info(tweetV2List.toString());

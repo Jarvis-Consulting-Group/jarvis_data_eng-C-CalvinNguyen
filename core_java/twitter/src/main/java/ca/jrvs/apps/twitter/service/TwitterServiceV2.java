@@ -4,10 +4,13 @@ import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * The implementation of the service interface that sets the generic type as the TweetV2 object.
  */
+@Component
 public class TwitterServiceV2 implements Service<TweetV2> {
 
   private CrdDao dao;
@@ -16,6 +19,7 @@ public class TwitterServiceV2 implements Service<TweetV2> {
    * Constructor that takes the DAO object dependency.
    * @param dao DAO object dependency that will be used.
    */
+  @Autowired
   public TwitterServiceV2(CrdDao dao) {
     this.dao = dao;
   }
