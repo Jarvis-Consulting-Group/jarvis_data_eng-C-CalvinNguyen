@@ -1,6 +1,7 @@
 package ca.jrvs.apps.twitter.controller;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.dao.TwitterDaoV2;
@@ -11,9 +12,7 @@ import ca.jrvs.apps.twitter.service.Service;
 import ca.jrvs.apps.twitter.service.TwitterServiceV2;
 import java.util.List;
 import org.junit.Before;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +31,8 @@ public class TwitterControllerV2IntTest {
     String ACCESS_TOKEN = System.getenv("accessToken");
     String TOKEN_SECRET = System.getenv("tokenSecret");
 
-    HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, TOKEN_SECRET);
+    HttpHelper httpHelper = new TwitterHttpHelper(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN,
+        TOKEN_SECRET);
     CrdDao dao = new TwitterDaoV2(httpHelper);
     service = new TwitterServiceV2(dao);
     twitterController = new TwitterControllerV2(service);
@@ -56,7 +56,8 @@ public class TwitterControllerV2IntTest {
     logger.info(tweetV2List.toString());
     tweetV2List.stream().forEach(tweet2 -> {
       assertEquals(tempId, tweet2.getId());
-      assertTrue(tweet2.isDeleted());});
+      assertTrue(tweet2.isDeleted());
+    });
   }
 
   /**
@@ -64,10 +65,11 @@ public class TwitterControllerV2IntTest {
    */
   @Test(expected = IllegalArgumentException.class)
   public void postTweetException() {
-    String text = "gwaavsujiryzlbrzrjccxpeycssfxwnutaplibpgiiszizfkvqnfoqifbkzgrdeuslxixcwzatckz\"\n"
-        + "        + \"yoxlmnukitohyzryokndwbtanuxmhxqpmcwbikkkwszuilfiuvjmbflcwrtvqigwekpuyytkbwoqysypbinbosm\"\n"
-        + "        + \"avwxrlpzhpblfhmrxxmasbuqjslcurjuxydcwpvugizodruotjouvzhvnilzrkhckowczaphwqflgczbppwqcbw\"\n"
-        + "        + \"ajyxrntcrvhfsnnmaetjxiibfqbmpoxamsajxjejaruoe";
+    String text =
+        "gwaavsujiryzlbrzrjccxpeycssfxwnutaplibpgiiszizfkvqnfoqifbkzgrdeuslxixcwzatckz\"\n"
+            + "        + \"yoxlmnukitohyzryokndwbtanuxmhxqpmcwbikkkwszuilfiuvjmbflcwrtvqigwekpuyytkbwoqysypbinbosm\"\n"
+            + "        + \"avwxrlpzhpblfhmrxxmasbuqjslcurjuxydcwpvugizodruotjouvzhvnilzrkhckowczaphwqflgczbppwqcbw\"\n"
+            + "        + \"ajyxrntcrvhfsnnmaetjxiibfqbmpoxamsajxjejaruoe";
 
     String[] args = {"post", text};
     TweetV2 tweet = (TweetV2) twitterController.postTweet(args);
@@ -76,9 +78,10 @@ public class TwitterControllerV2IntTest {
   @Test
   public void showTweet() {
     String id1 = "1629865830337990656";
-    String text = "@HotForMoot Hey @HotForMoot \uD83D\uDC4B, we've been hard at work developing our new free &amp; basic API tiers. We'll get back to you following the launch. \n"
-        + "\n"
-        + "Hint: it's coming very soon!";
+    String text =
+        "@HotForMoot Hey @HotForMoot \uD83D\uDC4B, we've been hard at work developing our new free &amp; basic API tiers. We'll get back to you following the launch. \n"
+            + "\n"
+            + "Hint: it's coming very soon!";
 
     String[] args = {"show", id1, null};
 
@@ -131,8 +134,8 @@ public class TwitterControllerV2IntTest {
   }
 
   /**
-   * Expects an IllegalArgumentException because the id is not numerical or not a positive
-   * 64-bit number..
+   * Expects an IllegalArgumentException because the id is not numerical or not a positive 64-bit
+   * number..
    */
   @Test(expected = IllegalArgumentException.class)
   public void deleteTweetException() {
