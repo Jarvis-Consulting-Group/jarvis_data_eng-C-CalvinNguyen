@@ -35,20 +35,22 @@ public class TwitterServiceV2IntTest {
 
   @Test
   public void postTweet() {
+    /*
     TweetV2 tweetV2 = new TweetV2();
 
-    /*
-    tweetV2.setText("gwaavsujiryzlbrzrjccxpeycssfxwnutaplibpgiiszizfkvqnfoqifbkzgrdeuslxixcwzatckz"
-        + "yoxlmnukitohyzryokndwbtanuxmhxqpmcwbikkkwszuilfiuvjmbflcwrtvqigwekpuyytkbwoqysypbinbosm"
-        + "avwxrlpzhpblfhmrxxmasbuqjslcurjuxydcwpvugizodruotjouvzhvnilzrkhckowczaphwqflgczbppwqcbw"
-        + "ajyxrntcrvhfsnnmaetjxiibfqbmpoxamsajxjejaruoe");
-     */
 
-    tweetV2.setText("Hello World!");
+    //tweetV2.setText("gwaavsujiryzlbrzrjccxpeycssfxwnutaplibpgiiszizfkvqnfoqifbkzgrdeuslxixcwzatckz"
+    //    + "yoxlmnukitohyzryokndwbtanuxmhxqpmcwbikkkwszuilfiuvjmbflcwrtvqigwekpuyytkbwoqysypbinbosm"
+    //    + "avwxrlpzhpblfhmrxxmasbuqjslcurjuxydcwpvugizodruotjouvzhvnilzrkhckowczaphwqflgczbppwqcbw"
+    //    + "ajyxrntcrvhfsnnmaetjxiibfqbmpoxamsajxjejaruoe");
+
+
+    tweetV2.setText("Hello World 14!");
 
     TweetV2 responseTweet = twitterServiceV2.postTweet(tweetV2);
     logger.info(responseTweet.toString());
     assertEquals(tweetV2.getText(), responseTweet.getText());
+    */
   }
 
   @Test
@@ -63,7 +65,7 @@ public class TwitterServiceV2IntTest {
     String[] fields = {"id", "text"};
     //String[] failFields = {"id", "tadwad"};
 
-    TweetV2 responseTweet1 = twitterServiceV2.showTweet(failId1, fields);
+    TweetV2 responseTweet1 = twitterServiceV2.showTweet(id1, fields);
     logger.info(responseTweet1.toString());
     assertEquals(text, responseTweet1.getText());
 

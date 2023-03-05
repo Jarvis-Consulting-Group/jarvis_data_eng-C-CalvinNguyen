@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelperTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.13 s - in ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelperTest

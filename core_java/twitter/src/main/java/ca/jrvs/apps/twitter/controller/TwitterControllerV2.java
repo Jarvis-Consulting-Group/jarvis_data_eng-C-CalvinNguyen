@@ -3,11 +3,14 @@ package ca.jrvs.apps.twitter.controller;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
 import ca.jrvs.apps.twitter.service.Service;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Implementation of the Controller class that sets the generic type as the TweetV2 objects, it
  * takes the command arguments passed and calls the appropriate service methods.
  */
+@Component
 public class TwitterControllerV2 implements Controller<TweetV2> {
 
   private static final String COORD_SEP = ":";
@@ -18,7 +21,7 @@ public class TwitterControllerV2 implements Controller<TweetV2> {
    * Constructor with the passed service object/layer dependency.
    * @param service service dependency passed (it will most likely be TwitterServiceV2 object).
    */
-  //@Autowired
+  @Autowired
   public TwitterControllerV2(Service service) {
     this.service = service;
   }

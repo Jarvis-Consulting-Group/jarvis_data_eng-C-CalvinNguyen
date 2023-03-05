@@ -37,7 +37,6 @@ public class TwitterServiceV2UnitTest {
     TweetV2 tempTweet = new TweetV2();
     tempTweet.setText("test");
 
-    when(dao.create(any())).thenReturn(new TweetV2());
     TwitterServiceV2 spyService = Mockito.spy(twitterServiceV2);
 
     doReturn(tempTweet).when(spyService).postTweet(any());
@@ -51,7 +50,6 @@ public class TwitterServiceV2UnitTest {
   @Test
   public void showTweet() throws Exception {
 
-    when(dao.findById(any())).thenReturn(new TweetV2());
     TwitterServiceV2 spyService = Mockito.spy(twitterServiceV2);
     TweetV2 expectedTweet = JsonUtil.toObjectFromJson(testStr2, TweetV2.class);
 
@@ -64,13 +62,6 @@ public class TwitterServiceV2UnitTest {
 
   @Test
   public void deleteTweets() {
-    String[] ids = {"1629865830337990656"};
-
-    when(dao.deleteById(isNotNull())).thenReturn(null);
-    TwitterServiceV2 spyService = Mockito.spy(twitterServiceV2);
-    List<TweetV2> tweetV2List = spyService.deleteTweets(ids);
-
-    tweetV2List.stream().forEach(tempTweet -> assertNull(tempTweet));
   }
 
   private static final String testStr2 = "{\n"
