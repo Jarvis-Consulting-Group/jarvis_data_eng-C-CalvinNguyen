@@ -2,19 +2,28 @@ package ca.jrvs.apps.twitter.model.v2;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 
+/**
+ * TwitterV2 class used for mapping objects from JSONs returned from the Twitter API V2.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties({
     "edit_history_tweet_ids"
 })
 public class TweetV2 {
 
+  @JsonProperty("id")
   private String id;
+  @JsonProperty("text")
   private String text;
-  private Date created_at;
+  @JsonProperty("created_at")
+  private Date createdAt;
+  @JsonProperty("entities")
   private EntitiesV2 entitiesV2;
-  private PublicMetricsV2 public_metrics;
+  @JsonProperty("public_metrics")
+  private PublicMetricsV2 publicMetrics;
 
   private boolean deleted = false;
 
@@ -34,12 +43,12 @@ public class TweetV2 {
     this.text = text;
   }
 
-  public Date getCreated_at() {
-    return created_at;
+  public Date getCreatedAt() {
+    return createdAt;
   }
 
-  public void setCreated_at(Date created_at) {
-    this.created_at = created_at;
+  public void setCreatedAt(Date createdAt) {
+    this.createdAt = createdAt;
   }
 
   public EntitiesV2 getEntities() {
@@ -50,12 +59,12 @@ public class TweetV2 {
     this.entitiesV2 = entitiesV2;
   }
 
-  public PublicMetricsV2 getPublic_metrics() {
-    return public_metrics;
+  public PublicMetricsV2 getPublicMetrics() {
+    return publicMetrics;
   }
 
-  public void setPublic_metrics(PublicMetricsV2 public_metrics) {
-    this.public_metrics = public_metrics;
+  public void setPublicMetrics(PublicMetricsV2 publicMetrics) {
+    this.publicMetrics = publicMetrics;
   }
 
   public boolean isDeleted() {
@@ -71,9 +80,9 @@ public class TweetV2 {
     return "Tweet{" + "\n"
         + "id='" + id + '\'' + "\n"
         + ", text='" + text + '\'' + "\n"
-        + ", created_at=" + created_at + "\n"
+        + ", created_at=" + createdAt + "\n"
         + ", entities=" + entitiesV2 + "\n"
-        + ", public_metrics=" + public_metrics + "\n"
+        + ", public_metrics=" + publicMetrics + "\n"
         + ", deleted=" + deleted + "\n"
         + '}';
   }

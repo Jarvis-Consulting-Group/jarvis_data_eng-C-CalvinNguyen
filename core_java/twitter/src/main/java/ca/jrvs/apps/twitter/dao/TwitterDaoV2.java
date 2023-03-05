@@ -10,8 +10,6 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * TwitterDaoV2 is the implementation of CrdDao for TweetV2 (specific to API V2) and Strings,
@@ -21,19 +19,26 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
 
   // URI Constants
   private static final String API_BASE_URI = "https://api.twitter.com";
+
   // API v2
   private static final String TWEET_PATH_V2 = "/2/tweets";
+
   // Symbols
   private static final String QUERY_SYM = "?";
   private static final String AMPERSAND = "&";
   private static final String EQUAL = "=";
+
   // OK Response Code
   private static final int HTTP_OK = 200;
 
-  private HttpHelper httpHelper;
-  private static final Logger logger = LoggerFactory.getLogger(TwitterDao.class);
+  private final HttpHelper httpHelper;
 
   //@Autowired
+
+  /**
+   * Constructor with the passed HttpHelper object dependency.
+   * @param httpHelper the HttpHelper dependency that the DAO will call.
+   */
   public TwitterDaoV2(HttpHelper httpHelper) {
     this.httpHelper = httpHelper;
   }
@@ -53,22 +58,24 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
    */
   public TweetV2 checkResponseV2(HttpResponse httpResponse, int statusCode) throws RuntimeException,
       IOException {
+    int responseCode = httpResponse.getStatusLine().getStatusCode();
+    String responsePhrase = httpResponse.getStatusLine().getReasonPhrase();
 
-    if (httpResponse.getStatusLine().getStatusCode() != statusCode) {
-      logger.debug(EntityUtils.toString(httpResponse.getEntity()));
+    if (responseCode != statusCode) {
       throw new RuntimeException("Error HTTP Status Code: "
-          + httpResponse.getStatusLine().getStatusCode()
+          + responseCode
           + " "
-          + httpResponse.getStatusLine().getReasonPhrase());
+          + responsePhrase
+      );
     }
 
     if (httpResponse.getEntity() == null) {
       throw new RuntimeException("Empty response body");
     }
 
-    Data data = JsonUtil.toObjectFromJson(EntityUtils.toString(httpResponse.getEntity()), Data.class);
+    Data data = JsonUtil.toObjectFromJson(EntityUtils.toString(
+        httpResponse.getEntity()), Data.class);
     return data.getTweet();
-
   }
 
   /**
@@ -80,19 +87,19 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
   @Override
   public TweetV2 create(TweetV2 tweetV2) {
     TweetV2 responseTweet = null;
+
     try {
-      URI uriV2 = new URI(API_BASE_URI
+      URI uri = new URI(API_BASE_URI
           + TWEET_PATH_V2);
 
       String s = "{\n"
           + "\"text\":\"" + tweetV2.getText() + "\"\n"
           + "}";
 
-      HttpResponse httpResponseV2 = httpHelper.httpPostV2(uriV2, s);
+      HttpResponse httpResponseV2 = httpHelper.httpPostV2(uri, s);
 
       responseTweet = checkResponseV2(httpResponseV2, 201);
       return responseTweet;
-
     } catch (URISyntaxException | IOException e) {
       throw new RuntimeException(e);
     }
@@ -110,15 +117,14 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
     TweetV2 tweetV2 = null;
 
     try {
-      URI uriV2 = new URI(API_BASE_URI
+      URI uri = new URI(API_BASE_URI
           + TWEET_PATH_V2 + "/"
           + s
           + QUERY_SYM + "tweet.fields" + EQUAL + "created_at,entities,public_metrics");
 
-      HttpResponse httpResponse = httpHelper.httpGet(uriV2);
+      HttpResponse httpResponse = httpHelper.httpGet(uri);
       tweetV2 = checkResponseV2(httpResponse, HTTP_OK);
       return tweetV2;
-
     } catch (URISyntaxException | IOException e) {
       throw new RuntimeException(e);
     }
@@ -126,10 +132,11 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
 
   /**
    * Uses Twitter API V2 endpoint, creates a URI given the id as a string. Calls the HTTPHelper
-   * to execute the URI, and unforuntately API V2 doesn't return the deleted tweet, it only returns
+   * to execute the URI, and unfortunately API V2 doesn't return the deleted tweet, it only returns
    * a json looking like {data: {deleted: true}}.
    * @param s the id given as a string.
-   * @return it is supposed to return a TweetV2 object but it returns null atm.
+   * @return it is supposed to return a TweetV2 object with the deleted property set as true and
+   * the specific ID.
    */
   @Override
   public TweetV2 deleteById(String s) {
@@ -137,16 +144,15 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
 
     try {
       PercentEscaper percentEscaper = new PercentEscaper("", false);
-      URI uriv2 = new URI(API_BASE_URI
+      URI uri = new URI(API_BASE_URI
           + TWEET_PATH_V2 + "/"
           + percentEscaper.escape(s));
 
       // Does not return deleted tweet object, returns {data: {deleted:true}}
-      HttpResponse httpResponse = httpHelper.httpDeleteV2(uriv2);
+      HttpResponse httpResponse = httpHelper.httpDeleteV2(uri);
 
       tweetV2 = checkResponseV2(httpResponse, HTTP_OK);
       return tweetV2;
-
     } catch (URISyntaxException | IOException e) {
       throw new RuntimeException(e);
     }

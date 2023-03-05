@@ -14,8 +14,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * TwitterHttpHelper is an implementation of HttpHelper that is used to execute the http methods
@@ -24,17 +22,16 @@ import org.slf4j.LoggerFactory;
  */
 public class TwitterHttpHelper implements HttpHelper {
 
-  private static final Logger logger = LoggerFactory.getLogger(TwitterApiTest.class);
   private final OAuthConsumer oauthConsumer;
   private final HttpClient httpClient;
 
   /**
    * Constructor for setiing up the consumer key, consumer secret, access token and token secret for
    * the OAuthConsumer object.
-   * @param consumerKey consumer key. API consumer key
-   * @param consumerSecret consumer secret. API consumer secret
-   * @param accessToken access token. API access token
-   * @param tokenSecret token secret. API token secret
+   * @param consumerKey consumer key. API consumer key.
+   * @param consumerSecret consumer secret. API consumer secret.
+   * @param accessToken access token. API access token.
+   * @param tokenSecret token secret. API token secret.
    */
   public TwitterHttpHelper(String consumerKey, String consumerSecret,
       String accessToken, String tokenSecret) {
@@ -105,6 +102,13 @@ public class TwitterHttpHelper implements HttpHelper {
     }
   }
 
+  /**
+   * Will take a HttpUriRequest, sign it with OAuth authentication and execute it with the httpclient.
+   * @param httpUriRequest HttpUriRequest to execute.
+   * @return returns the HttpResponse from the httpClient.execute() method
+   * @throws IOException can throw IOException when executing httpclient.
+   * @throws OAuthException throws OAuthException if unable to add/sign OAuth authentication
+   */
   private HttpResponse httpRequestExecutor(HttpUriRequest httpUriRequest)
       throws IOException, OAuthException {
 

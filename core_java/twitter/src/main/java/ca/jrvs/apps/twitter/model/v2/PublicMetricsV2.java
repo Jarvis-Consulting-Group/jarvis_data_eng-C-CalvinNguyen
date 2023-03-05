@@ -1,64 +1,74 @@
 package ca.jrvs.apps.twitter.model.v2;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * PublicMetricsV2 class used for mapping the public_metrics object within the data/tweet object in
+ * the JSON object in the Twitter API V2.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PublicMetricsV2 {
 
-  private int retweet_count;
-  private int reply_count;
-  private int like_count;
-  private int quote_count;
-  private int impression_count;
+  @JsonProperty("retweet_count")
+  private int retweetCount;
+  @JsonProperty("reply_count")
+  private int replyCount;
+  @JsonProperty("like_count")
+  private int likeCount;
+  @JsonProperty("quote_count")
+  private int quoteCount;
+  @JsonProperty("impression_count")
+  private int impressionCount;
 
-  public int getRetweet_count() {
-    return retweet_count;
+  public int getRetweetCount() {
+    return retweetCount;
   }
 
-  public void setRetweet_count(int retweet_count) {
-    this.retweet_count = retweet_count;
+  public void setRetweetCount(int retweetCount) {
+    this.retweetCount = retweetCount;
   }
 
-  public int getReply_count() {
-    return reply_count;
+  public int getReplyCount() {
+    return replyCount;
   }
 
-  public void setReply_count(int reply_count) {
-    this.reply_count = reply_count;
+  public void setReplyCount(int replyCount) {
+    this.replyCount = replyCount;
   }
 
-  public int getLike_count() {
-    return like_count;
+  public int getLikeCount() {
+    return likeCount;
   }
 
-  public void setLike_count(int like_count) {
-    this.like_count = like_count;
+  public void setLikeCount(int likeCount) {
+    this.likeCount = likeCount;
   }
 
-  public int getQuote_count() {
-    return quote_count;
+  public int getQuoteCount() {
+    return quoteCount;
   }
 
-  public void setQuote_count(int quote_count) {
-    this.quote_count = quote_count;
+  public void setQuoteCount(int quoteCount) {
+    this.quoteCount = quoteCount;
   }
 
-  public int getImpression_count() {
-    return impression_count;
+  public int getImpressionCount() {
+    return impressionCount;
   }
 
-  public void setImpression_count(int impression_count) {
-    this.impression_count = impression_count;
+  public void setImpressionCount(int impressionCount) {
+    this.impressionCount = impressionCount;
   }
 
   @Override
   public String toString() {
-    return "PublicMetrics{"
-        + "retweet_count=" + retweet_count
-        + ", reply_count=" + reply_count
-        + ", like_count=" + like_count
-        + ", quote_count=" + quote_count
-        + ", impression_count=" + impression_count
+    return "PublicMetricsV2{"
+        + "retweetCount=" + retweetCount
+        + ", replyCount=" + replyCount
+        + ", likeCount=" + likeCount
+        + ", quoteCount=" + quoteCount
+        + ", impressionCount=" + impressionCount
         + '}';
   }
 }

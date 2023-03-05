@@ -2,6 +2,10 @@ package ca.jrvs.apps.twitter.model.v2;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+/**
+ * Hashtag object used for mapping the hashtags object within the data/tweet object returned from
+ * the Twitter API V2 JSON string.
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class HashtagV2 {
 
