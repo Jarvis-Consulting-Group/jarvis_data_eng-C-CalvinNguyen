@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: ca.jrvs.apps.twitter.controller.TwitterControllerV2IntTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.056 s <<< FAILURE! - in ca.jrvs.apps.twitter.controller.TwitterControllerV2IntTest
+showTweet(ca.jrvs.apps.twitter.controller.TwitterControllerV2IntTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.RuntimeException: Exception
+	at ca.jrvs.apps.twitter.controller.TwitterControllerV2IntTest.showTweet(TwitterControllerV2IntTest.java:88)
+Caused by: oauth.signpost.exception.OAuthExpectationFailedException: consumer key not set
+	at ca.jrvs.apps.twitter.controller.TwitterControllerV2IntTest.showTweet(TwitterControllerV2IntTest.java:88)
+
+postDeleteTweet(ca.jrvs.apps.twitter.controller.TwitterControllerV2IntTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.RuntimeException: Exception
+	at ca.jrvs.apps.twitter.controller.TwitterControllerV2IntTest.postDeleteTweet(TwitterControllerV2IntTest.java:48)
+Caused by: oauth.signpost.exception.OAuthExpectationFailedException: consumer key not set
+	at ca.jrvs.apps.twitter.controller.TwitterControllerV2IntTest.postDeleteTweet(TwitterControllerV2IntTest.java:48)
+

@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: ca.jrvs.apps.twitter.dao.TwitterDaoV2IntTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.69 s <<< FAILURE! - in ca.jrvs.apps.twitter.dao.TwitterDaoV2IntTest
+findById(ca.jrvs.apps.twitter.dao.TwitterDaoV2IntTest)  Time elapsed: 0.038 s  <<< ERROR!
+java.lang.RuntimeException: Exception
+	at ca.jrvs.apps.twitter.dao.TwitterDaoV2IntTest.findById(TwitterDaoV2IntTest.java:50)
+Caused by: oauth.signpost.exception.OAuthExpectationFailedException: consumer key not set
+	at ca.jrvs.apps.twitter.dao.TwitterDaoV2IntTest.findById(TwitterDaoV2IntTest.java:50)
+
+deleteById(ca.jrvs.apps.twitter.dao.TwitterDaoV2IntTest)  Time elapsed: 0 s  <<< ERROR!
+java.lang.RuntimeException: Exception
+	at ca.jrvs.apps.twitter.dao.TwitterDaoV2IntTest.deleteById(TwitterDaoV2IntTest.java:60)
+Caused by: oauth.signpost.exception.OAuthExpectationFailedException: consumer key not set
+	at ca.jrvs.apps.twitter.dao.TwitterDaoV2IntTest.deleteById(TwitterDaoV2IntTest.java:60)
+
