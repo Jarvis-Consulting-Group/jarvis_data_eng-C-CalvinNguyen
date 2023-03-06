@@ -36,8 +36,6 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
 
   private final HttpHelper httpHelper;
 
-  //@Autowired
-
   /**
    * Constructor with the passed HttpHelper object dependency.
    * @param httpHelper the HttpHelper dependency that the DAO will call.
