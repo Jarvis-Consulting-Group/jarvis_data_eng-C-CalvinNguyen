@@ -145,24 +145,24 @@ public class TwitterServiceV2 implements Service<TweetV2> {
   @Override
   public List<TweetV2> deleteTweets(String[] ids) {
 
-    // Validate each tweet
-    validateDeleteTweet(ids);
-
-    // Return List of Deleted Tweets
-    return deleteTweetList(ids);
+    // Validate Each ID, and Return List of Deleted Tweets
+    return validateDeleteTweetList(ids);
     
   }
 
   /**
-   * Calls to delete each TweetV2 object using the DAO.
+   * Validates each ID by calling the checkId method and calls to delete each
+   * TweetV2 object using the DAO.
    * @param ids String array of IDs.
    * @return returns the list of deleted tweets objects.
    */
-  private List<TweetV2> deleteTweetList(String[] ids) {
+  private List<TweetV2> validateDeleteTweetList(String[] ids) {
 
     List<TweetV2> tweetV2List = new ArrayList<>();
 
     for (String id : ids) {
+      checkId(id);
+
       TweetV2 returnTweet = (TweetV2) dao.deleteById(id);
       returnTweet.getData().setId(id);
       tweetV2List.add(returnTweet);
@@ -170,17 +170,4 @@ public class TwitterServiceV2 implements Service<TweetV2> {
 
     return tweetV2List;
   }
-
-  /**
-   * Validates whether each ID within the string array ids is valid (numerical and 64-bit positive
-   * integer).
-   * @param ids the passed String array of ids.
-   */
-  private void validateDeleteTweet(String[] ids) {
-    for (String id : ids) {
-      // For each tweet call checkId(id), if it isn't valid throws IllegalArgumentException
-      checkId(id);
-    }
-  }
-
 }
