@@ -1,6 +1,7 @@
 package ca.jrvs.apps.twitter.service;
 
 import ca.jrvs.apps.twitter.dao.CrdDao;
+import ca.jrvs.apps.twitter.model.v2.Data;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +41,7 @@ public class TwitterServiceV2 implements Service<TweetV2> {
    */
   private void validatePostTweet(TweetV2 tweet) {
 
-    if (tweet.getText().length() > 140) {
+    if (tweet.getData().getText().length() > 140) {
       throw new IllegalArgumentException("Tweet text length exceeds 140 characters.");
     }
   }
@@ -52,6 +53,8 @@ public class TwitterServiceV2 implements Service<TweetV2> {
 
     TweetV2 responseTweet = (TweetV2) dao.findById(id);
     TweetV2 returnTweet = new TweetV2();
+    Data returnData = new Data();
+    returnTweet.setData(returnData);
 
     if (fields == null) {
       returnTweet = responseTweet;
@@ -59,16 +62,16 @@ public class TwitterServiceV2 implements Service<TweetV2> {
       for (String field : fields) {
         switch (field) {
           case "id":
-            returnTweet.setId(responseTweet.getId());
+            returnTweet.getData().setId(responseTweet.getData().getId());
             break;
           case "text":
-            returnTweet.setText(responseTweet.getText());
+            returnTweet.getData().setText(responseTweet.getData().getText());
             break;
           case "entities":
-            returnTweet.setEntities(responseTweet.getEntities());
+            returnTweet.getData().setEntities(responseTweet.getData().getEntities());
             break;
           case "public_metrics":
-            returnTweet.setPublicMetrics(responseTweet.getPublicMetrics());
+            returnTweet.getData().setPublicMetrics(responseTweet.getData().getPublicMetrics());
             break;
           default:
             break;
@@ -90,7 +93,6 @@ public class TwitterServiceV2 implements Service<TweetV2> {
 
     // Validate id
     checkId(id);
-
 
     if (fields != null) {
 
@@ -162,7 +164,7 @@ public class TwitterServiceV2 implements Service<TweetV2> {
 
     for (String id : ids) {
       TweetV2 returnTweet = (TweetV2) dao.deleteById(id);
-      returnTweet.setId(id);
+      returnTweet.getData().setId(id);
       tweetV2List.add(returnTweet);
     }
 

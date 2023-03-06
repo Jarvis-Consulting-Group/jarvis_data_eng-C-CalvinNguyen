@@ -1,5 +1,6 @@
 package ca.jrvs.apps.twitter.controller;
 
+import ca.jrvs.apps.twitter.model.v2.Data;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
 import ca.jrvs.apps.twitter.service.Service;
 import java.util.List;
@@ -29,7 +30,9 @@ public class TwitterControllerV2 implements Controller<TweetV2> {
   @Override
   public TweetV2 postTweet(String[] args) {
     TweetV2 tempTweet = new TweetV2();
-    tempTweet.setText(args[1]);
+    Data data = new Data();
+    data.setText(args[1]);
+    tempTweet.setData(data);
 
     //String[] geoArr = args[2].split(COORD_SEP);
 

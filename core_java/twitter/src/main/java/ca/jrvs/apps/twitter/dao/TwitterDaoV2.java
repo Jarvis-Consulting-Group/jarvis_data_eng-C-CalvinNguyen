@@ -31,9 +31,6 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
   private static final String AMPERSAND = "&";
   private static final String EQUAL = "=";
 
-  // OK Response Code
-  private static final int HTTP_OK = 200;
-
   private final HttpHelper httpHelper;
 
   /**
@@ -47,10 +44,9 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
 
   /**
    *  checkResponse method makes sure that the httpResponse status code matches the expected status
-   *  code and if it doesn't, the method throws an exception. It also checks if the response body
-   *  isn't empty and if it is, it throws an exception.
-   *  If it passes all checks it creates a TweetV2 (Twitter API v2) object from the response body
-   *  json using the toObjectFromJson method.
+   *  code and if it doesn't, the method throws an exception.
+   *  If it passes the checks it then creates a TweetV2 (Twitter API v2) object from the response body
+   *  JSON using the toObjectFromJson method.
    * @param httpResponse httpResponse returned after executing using HttpHelper.
    * @param statusCode status code expected from the httpResponse status code.
    * @return returns a TweetV2 object (Twitter V2 API)
@@ -71,13 +67,9 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
       );
     }
 
-    if (httpResponse.getEntity() == null) {
-      throw new RuntimeException("HttpResponse body is empty.");
-    }
-
-    Data data = JsonUtil.toObjectFromJson(EntityUtils.toString(
-        httpResponse.getEntity()), Data.class);
-    return data.getTweet();
+    TweetV2 tweetV2 = JsonUtil.toObjectFromJson(EntityUtils.toString(
+        httpResponse.getEntity()), TweetV2.class);
+    return tweetV2;
   }
 
   /**
@@ -96,7 +88,7 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
           + TWEET_PATH_V2);
 
       String s = "{\n"
-          + "\"text\":\"" + tweetV2.getText() + "\"\n"
+          + "\"text\":\"" + tweetV2.getData().getText() + "\"\n"
           + "}";
 
       HttpResponse httpResponseV2 = httpHelper.httpPostV2(uri, s);
@@ -127,7 +119,7 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
           + QUERY_SYM + "tweet.fields" + EQUAL + "created_at,entities,public_metrics");
 
       HttpResponse httpResponse = httpHelper.httpGet(uri);
-      tweetV2 = checkResponseV2(httpResponse, HTTP_OK);
+      tweetV2 = checkResponseV2(httpResponse, 200);
       return tweetV2;
     } catch (URISyntaxException | IOException e) {
       throw new RuntimeException(e);
@@ -156,7 +148,7 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
       // Does not return deleted tweet object, returns {data: {deleted:true}}
       HttpResponse httpResponse = httpHelper.httpDeleteV2(uri);
 
-      tweetV2 = checkResponseV2(httpResponse, HTTP_OK);
+      tweetV2 = checkResponseV2(httpResponse, 200);
       return tweetV2;
     } catch (URISyntaxException | IOException e) {
       throw new RuntimeException(e);
