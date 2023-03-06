@@ -66,7 +66,7 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
     String responsePhrase = httpResponse.getStatusLine().getReasonPhrase();
 
     if (responseCode != statusCode) {
-      throw new RuntimeException("Error HTTP Status Code: "
+      throw new RuntimeException("Error! HTTP Status Code: "
           + responseCode
           + " "
           + responsePhrase
@@ -74,7 +74,7 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
     }
 
     if (httpResponse.getEntity() == null) {
-      throw new RuntimeException("Empty response body");
+      throw new RuntimeException("HttpResponse body is empty.");
     }
 
     Data data = JsonUtil.toObjectFromJson(EntityUtils.toString(
@@ -83,9 +83,10 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
   }
 
   /**
-   * createV2 calls the HttpHelper to execute a POST method at Twitter API V2 endpoint
-   * that takes a json string for the text.
-   * @param tweetV2 The TweetV2 that only contains text.
+   * create method sets the URI and calls the HttpHelper to execute a POST method at
+   * Twitter API V2 endpoint. The create method also passes a json string that will be used in the
+   * HTTP request body for the tweet text.
+   * @param tweetV2 The TweetV2 that only contains the text property.
    * @return returns the TweetV2 object that is given in the response from HttpResponse.
    */
   @Override
@@ -101,7 +102,6 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
           + "}";
 
       HttpResponse httpResponseV2 = httpHelper.httpPostV2(uri, s);
-
       responseTweet = checkResponseV2(httpResponseV2, 201);
       return responseTweet;
     } catch (URISyntaxException | IOException e) {
@@ -121,9 +121,11 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
     TweetV2 tweetV2 = null;
 
     try {
+      PercentEscaper percentEscaper = new PercentEscaper("", false);
+
       URI uri = new URI(API_BASE_URI
           + TWEET_PATH_V2 + "/"
-          + s
+          + percentEscaper.escape(s)
           + QUERY_SYM + "tweet.fields" + EQUAL + "created_at,entities,public_metrics");
 
       HttpResponse httpResponse = httpHelper.httpGet(uri);
@@ -148,6 +150,7 @@ public class TwitterDaoV2 implements CrdDao<TweetV2, String> {
 
     try {
       PercentEscaper percentEscaper = new PercentEscaper("", false);
+      
       URI uri = new URI(API_BASE_URI
           + TWEET_PATH_V2 + "/"
           + percentEscaper.escape(s));

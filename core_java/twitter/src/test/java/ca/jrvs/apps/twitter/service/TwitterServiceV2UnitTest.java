@@ -4,16 +4,24 @@ import static jdk.internal.dynalink.support.Guards.isNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import ca.jrvs.apps.twitter.JsonUtil;
 import ca.jrvs.apps.twitter.dao.CrdDao;
+import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
+import com.sun.org.apache.xpath.internal.Arg;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -27,7 +35,10 @@ public class TwitterServiceV2UnitTest {
   private static final Logger logger = LoggerFactory.getLogger(TwitterServiceV2UnitTest.class);
 
   @Mock
-  CrdDao dao;
+  HttpHelper mockHelper;
+
+  @Mock
+  CrdDao mockDao;
 
   @InjectMocks
   TwitterServiceV2 twitterServiceV2;
@@ -37,18 +48,38 @@ public class TwitterServiceV2UnitTest {
     TweetV2 tempTweet = new TweetV2();
     tempTweet.setText("test");
 
+    when(mockDao.create(tempTweet)).thenThrow(new RuntimeException("mock dao"));
+    try {
+      twitterServiceV2.postTweet(tempTweet);
+      fail();
+    } catch (RuntimeException | AssertionError e) {
+      logger.error("Exception ", e);
+      assertTrue(true);
+    }
+
     TwitterServiceV2 spyService = Mockito.spy(twitterServiceV2);
 
     doReturn(tempTweet).when(spyService).postTweet(any());
     TweetV2 tweetV2 = spyService.postTweet(tempTweet);
 
-    logger.info(tweetV2.toString());
+    logger.debug(tweetV2.toString());
     assertNotNull(tweetV2);
     assertEquals(tempTweet.getText(), tweetV2.getText());
   }
 
   @Test
   public void showTweet() throws Exception {
+    TweetV2 tempTweet = new TweetV2();
+    tempTweet.setText("test");
+
+    when(mockDao.findById("1629865830337990656")).thenThrow(new RuntimeException("mock dao"));
+    try {
+      twitterServiceV2.showTweet("1629865830337990656", null);
+      fail();
+    } catch (RuntimeException | AssertionError e) {
+      logger.error("Exception ", e);
+      assertTrue(true);
+    }
 
     TwitterServiceV2 spyService = Mockito.spy(twitterServiceV2);
     TweetV2 expectedTweet = JsonUtil.toObjectFromJson(testStr2, TweetV2.class);
@@ -56,12 +87,37 @@ public class TwitterServiceV2UnitTest {
     doReturn(expectedTweet).when(spyService).showTweet(any(), any());
     TweetV2 tweet = spyService.showTweet("1629865830337990656", null);
 
+    logger.debug(tweet.toString());
     assertNotNull(tweet);
     assertNotNull(tweet.getText());
   }
 
   @Test
-  public void deleteTweets() {
+  public void deleteTweets() throws Exception {
+    List<TweetV2> expectedList = new ArrayList<>();
+    String[] tempArr = {"1629865830337990656"};
+
+    when(mockDao.deleteById("1629865830337990656")).thenThrow(new RuntimeException("mock dao"));
+    try {
+      twitterServiceV2.deleteTweets(tempArr);
+      fail();
+    } catch (RuntimeException | AssertionError e) {
+      logger.error("Exception ", e);
+      assertTrue(true);
+    }
+
+    TwitterServiceV2 spyService = Mockito.spy(twitterServiceV2);
+
+    TweetV2 expectedTweet = new TweetV2();
+    expectedTweet.setId("1629865830337990656");
+    expectedTweet.setDeleted(true);
+    expectedList.add(expectedTweet);
+
+    doReturn(expectedList).when(spyService).deleteTweets(any());
+    List<TweetV2> tweetV2List = spyService.deleteTweets(tempArr);
+
+    logger.debug(tweetV2List.toString());
+    assertNotNull(tweetV2List);
   }
 
   private static final String testStr2 = "{\n"

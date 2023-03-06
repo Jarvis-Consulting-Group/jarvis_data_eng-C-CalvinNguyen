@@ -81,6 +81,25 @@ public class TwitterDaoV2UnitTest {
 
   @Test
   public void deleteTweet() throws IOException {
+    when(mockHelper.httpDeleteV2(isNotNull())).thenThrow(new RuntimeException("mock"));
+    try {
+      twitterDaoV2.deleteById("1629865830337990656");
+      fail();
+    } catch (RuntimeException e) {
+      assertTrue(true);
+    }
+
+    when(mockHelper.httpDeleteV2(isNotNull())).thenReturn(null);
+    TwitterDaoV2 spyDao = Mockito.spy(twitterDaoV2);
+    TweetV2 expectedTweet = JsonUtil.toObjectFromJson(testStr2, TweetV2.class);
+    expectedTweet.setDeleted(true);
+
+    doReturn(expectedTweet).when(spyDao).checkResponseV2(any(), anyInt());
+    TweetV2 tweetV2 = spyDao.deleteById("1629865830337990656");
+
+    logger.info(tweetV2.toString());
+    assertNotNull(tweetV2);
+    assertNotNull(tweetV2.getText());
   }
 
   private static final String testStr2 = "{\n"

@@ -39,6 +39,7 @@ public class TwitterControllerV2IntTest {
 
   }
 
+  // Combined both posting and deletion of tweets because Twitter API does not allow duplicate texts.
   @Test
   public void postDeleteTweet() {
     String text = "Hello World! 4";
@@ -117,7 +118,6 @@ public class TwitterControllerV2IntTest {
     String[] args3 = {"show", id3, null};
 
     TweetV2 tweet2 = (TweetV2) twitterController.showTweet(args3);
-
      */
   }
 

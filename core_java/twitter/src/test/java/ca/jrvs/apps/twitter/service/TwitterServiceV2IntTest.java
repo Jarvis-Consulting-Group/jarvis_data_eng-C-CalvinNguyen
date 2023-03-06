@@ -1,12 +1,14 @@
 package ca.jrvs.apps.twitter.service;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.dao.TwitterDaoV2;
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -33,9 +35,9 @@ public class TwitterServiceV2IntTest {
     twitterServiceV2 = new TwitterServiceV2(dao);
   }
 
+  // Combined posting and deletion of tweets because Twitter does not allow duplicate texts.
   @Test
-  public void postTweet() {
-    /*
+  public void postAndDeleteTweet() {
     TweetV2 tweetV2 = new TweetV2();
 
 
@@ -45,12 +47,17 @@ public class TwitterServiceV2IntTest {
     //    + "ajyxrntcrvhfsnnmaetjxiibfqbmpoxamsajxjejaruoe");
 
 
-    tweetV2.setText("Hello World 14!");
+    tweetV2.setText("Hello World! Test Tweet 1");
 
     TweetV2 responseTweet = twitterServiceV2.postTweet(tweetV2);
     logger.info(responseTweet.toString());
     assertEquals(tweetV2.getText(), responseTweet.getText());
-    */
+
+    String[] tempArr = {responseTweet.getId()};
+
+    List<TweetV2> deleteList = twitterServiceV2.deleteTweets(tempArr);
+    logger.info(deleteList.toString());
+    assertNotNull(deleteList);
   }
 
   @Test
@@ -69,9 +76,5 @@ public class TwitterServiceV2IntTest {
     logger.info(responseTweet1.toString());
     assertEquals(text, responseTweet1.getText());
 
-  }
-
-  @Test
-  public void deleteTweets() {
   }
 }

@@ -26,18 +26,20 @@ public class TwitterDaoV2IntTest {
     twitterDaoV2 = new TwitterDaoV2(httpHelper);
   }
 
+  // Combined the creation and deletion of tweets because Tweets cannot contain duplicate texts?
   @Test
-  public void create() {
-    /*
+  public void createAndDeleteById() {
     TweetV2 tweetV2 = new TweetV2();
 
-    tweetV2.setText("Hello World 1!");
+    tweetV2.setText("Hello World! Temporary Test Tweet");
 
     TweetV2 responseTweetV2 = twitterDaoV2.create(tweetV2);
     logger.info(responseTweetV2.toString());
     assertEquals(tweetV2.getText(), responseTweetV2.getText());
 
-     */
+    TweetV2 deleteTweet = twitterDaoV2.deleteById(responseTweetV2.getId());
+    logger.info(deleteTweet.toString());
+    assertNotNull(deleteTweet);
   }
 
   @Test
@@ -51,14 +53,5 @@ public class TwitterDaoV2IntTest {
     logger.info(tweetV2.toString());
     assertEquals(text, tweetV2.getText());
     assertEquals(id, tweetV2.getId());
-  }
-
-  @Test
-  public void deleteById() {
-    String id = "1631343910608936978";
-
-    TweetV2 tweetV2 = twitterDaoV2.deleteById(id);
-    logger.info(tweetV2.toString());
-    assertNotNull(tweetV2);
   }
 }
