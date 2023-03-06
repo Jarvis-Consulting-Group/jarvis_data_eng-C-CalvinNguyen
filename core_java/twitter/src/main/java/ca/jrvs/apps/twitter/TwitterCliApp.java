@@ -4,11 +4,14 @@ import ca.jrvs.apps.twitter.controller.Controller;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Main class used when calling the application, it takes the arguments and contains the controller
  * as a dependency. IT will pass the arguments to the appropriate controller arguments.
  */
+@Component
 public class TwitterCliApp {
 
   private final Controller controller;
@@ -24,6 +27,7 @@ public class TwitterCliApp {
    *
    * @param controller Controller dependency passed in the constructor.
    */
+  @Autowired
   public TwitterCliApp(Controller controller) {
     this.controller = controller;
   }
