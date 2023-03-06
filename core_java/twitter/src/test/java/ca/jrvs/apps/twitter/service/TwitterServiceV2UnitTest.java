@@ -1,38 +1,29 @@
 package ca.jrvs.apps.twitter.service;
 
-import static jdk.internal.dynalink.support.Guards.isNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import ca.jrvs.apps.twitter.JsonUtil;
 import ca.jrvs.apps.twitter.dao.CrdDao;
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
+import ca.jrvs.apps.twitter.model.v2.Data;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
-import com.sun.org.apache.xpath.internal.Arg;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.ArgumentMatchers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TwitterServiceV2UnitTest {
-
-  private static final Logger logger = LoggerFactory.getLogger(TwitterServiceV2UnitTest.class);
 
   @Mock
   HttpHelper mockHelper;
@@ -46,14 +37,15 @@ public class TwitterServiceV2UnitTest {
   @Test
   public void postTweet() {
     TweetV2 tempTweet = new TweetV2();
-    tempTweet.setText("test");
+    Data data = new Data();
+    data.setText("test");
+    tempTweet.setData(data);
 
     when(mockDao.create(tempTweet)).thenThrow(new RuntimeException("mock dao"));
     try {
       twitterServiceV2.postTweet(tempTweet);
       fail();
     } catch (RuntimeException | AssertionError e) {
-      logger.error("Exception ", e);
       assertTrue(true);
     }
 
@@ -62,22 +54,22 @@ public class TwitterServiceV2UnitTest {
     doReturn(tempTweet).when(spyService).postTweet(any());
     TweetV2 tweetV2 = spyService.postTweet(tempTweet);
 
-    logger.debug(tweetV2.toString());
     assertNotNull(tweetV2);
-    assertEquals(tempTweet.getText(), tweetV2.getText());
+    assertEquals(tempTweet.getData().getText(), tweetV2.getData().getText());
   }
 
   @Test
   public void showTweet() throws Exception {
     TweetV2 tempTweet = new TweetV2();
-    tempTweet.setText("test");
+    Data data = new Data();
+    data.setText("test");
+    tempTweet.setData(data);
 
     when(mockDao.findById("1629865830337990656")).thenThrow(new RuntimeException("mock dao"));
     try {
       twitterServiceV2.showTweet("1629865830337990656", null);
       fail();
     } catch (RuntimeException | AssertionError e) {
-      logger.error("Exception ", e);
       assertTrue(true);
     }
 
@@ -87,9 +79,8 @@ public class TwitterServiceV2UnitTest {
     doReturn(expectedTweet).when(spyService).showTweet(any(), any());
     TweetV2 tweet = spyService.showTweet("1629865830337990656", null);
 
-    logger.debug(tweet.toString());
     assertNotNull(tweet);
-    assertNotNull(tweet.getText());
+    assertNotNull(tweet.getData().getText());
   }
 
   @Test
@@ -102,25 +93,26 @@ public class TwitterServiceV2UnitTest {
       twitterServiceV2.deleteTweets(tempArr);
       fail();
     } catch (RuntimeException | AssertionError e) {
-      logger.error("Exception ", e);
       assertTrue(true);
     }
 
     TwitterServiceV2 spyService = Mockito.spy(twitterServiceV2);
 
     TweetV2 expectedTweet = new TweetV2();
-    expectedTweet.setId("1629865830337990656");
-    expectedTweet.setDeleted(true);
+    Data data = new Data();
+    data.setId("1629865830337990656");
+    data.setDeleted(true);
+    expectedTweet.setData(data);
     expectedList.add(expectedTweet);
 
     doReturn(expectedList).when(spyService).deleteTweets(any());
     List<TweetV2> tweetV2List = spyService.deleteTweets(tempArr);
 
-    logger.debug(tweetV2List.toString());
     assertNotNull(tweetV2List);
   }
 
   private static final String testStr2 = "{\n"
+      + "\"data\": {"
       + "     \"id\":\"1629865830337990656\",\n"
       + "     \"text\":\"@HotForMoot Hey @HotForMoot ??, we've been hard at work developing our new free &amp; basic API tiers. We'll get back to you following the launch. \\n\\nHint: it's coming very soon!\",\n"
       + "     \"created_at\":\"2023-02-26T15:27:50.000Z\",\n"
@@ -150,5 +142,6 @@ public class TwitterServiceV2UnitTest {
       + "       \"quote_count\": 3,\n"
       + "       \"impression_count\": 3244\n"
       + "     }\n"
-      + "   }\n";
+      + "   }\n"
+      + "}";
 }

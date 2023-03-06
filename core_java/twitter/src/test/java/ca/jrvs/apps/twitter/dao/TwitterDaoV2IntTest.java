@@ -4,15 +4,13 @@ import static org.junit.Assert.*;
 
 import ca.jrvs.apps.twitter.dao.helper.HttpHelper;
 import ca.jrvs.apps.twitter.dao.helper.TwitterHttpHelper;
+import ca.jrvs.apps.twitter.model.v2.Data;
 import ca.jrvs.apps.twitter.model.v2.TweetV2;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TwitterDaoV2IntTest {
 
-  private static final Logger logger = LoggerFactory.getLogger(TwitterDaoV2IntTest.class);
   private TwitterDaoV2 twitterDaoV2;
 
   @Before
@@ -30,15 +28,14 @@ public class TwitterDaoV2IntTest {
   @Test
   public void createAndDeleteById() {
     TweetV2 tweetV2 = new TweetV2();
-
-    tweetV2.setText("Hello World! Temporary Test Tweet");
+    Data data = new Data();
+    data.setText("Hello World! Temporary Test Tweet");
+    tweetV2.setData(data);
 
     TweetV2 responseTweetV2 = twitterDaoV2.create(tweetV2);
-    logger.info(responseTweetV2.toString());
-    assertEquals(tweetV2.getText(), responseTweetV2.getText());
+    assertEquals(tweetV2.getData().getText(), responseTweetV2.getData().getText());
 
-    TweetV2 deleteTweet = twitterDaoV2.deleteById(responseTweetV2.getId());
-    logger.info(deleteTweet.toString());
+    TweetV2 deleteTweet = twitterDaoV2.deleteById(responseTweetV2.getData().getId());
     assertNotNull(deleteTweet);
   }
 
@@ -50,8 +47,7 @@ public class TwitterDaoV2IntTest {
     String id = "1629865830337990656";
 
     TweetV2 tweetV2 = twitterDaoV2.findById(id);
-    logger.info(tweetV2.toString());
-    assertEquals(text, tweetV2.getText());
-    assertEquals(id, tweetV2.getId());
+    assertEquals(text, tweetV2.getData().getText());
+    assertEquals(id, tweetV2.getData().getId());
   }
 }

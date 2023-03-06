@@ -14,7 +14,7 @@ public class TwitterCliApp {
   private final Controller controller;
 
   // Message to be presented if the arguments are illegal.
-  private static final String USAGE = "USAGE: \n"
+  private static final String SYNTAX = "USAGE: \n"
       + "TwitterApp post \"text\" \n"
       + "TwitterApp show \"tweet_id\" [fields1,fields2] \n"
       + "TwitterApp delete [tweet_id1,tweet_id2]";
@@ -30,34 +30,33 @@ public class TwitterCliApp {
 
   /**
    * Calls a specific method from the controller based on the arguments passed or throws an
-   * exception.
+   * exception when there are too many arguments or not enough for a command.
    *
    * @param args String array of arguments passed when calling the application.
    */
   public void run(String[] args) {
     if (args.length > 3 || args.length <= 1) {
-      throw new IllegalArgumentException(USAGE);
+      throw new IllegalArgumentException(SYNTAX);
     }
 
     switch (args[0]) {
       case "post":
-
         TweetV2 tweet = (TweetV2) controller.postTweet(args);
         printJson(tweet, true);
         break;
-      case "show":
 
+      case "show":
         TweetV2 tweet2 = (TweetV2) controller.showTweet(args);
         printJson(tweet2, args.length == 2);
         break;
-      case "delete":
 
+      case "delete":
         List<TweetV2> tweetV2List = controller.deleteTweet(args);
         tweetV2List.forEach(tweet3 -> printJson(tweet3, false));
         break;
-      default:
 
-        throw new IllegalArgumentException(USAGE);
+      default:
+        throw new IllegalArgumentException(SYNTAX);
     }
   }
 

@@ -13,12 +13,8 @@ import ca.jrvs.apps.twitter.service.TwitterServiceV2;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TwitterControllerV2IntTest {
-
-  private static final Logger logger = LoggerFactory.getLogger(TwitterControllerV2IntTest.class);
 
   private Service service;
 
@@ -47,17 +43,15 @@ public class TwitterControllerV2IntTest {
     String[] args = {"post", text};
 
     TweetV2 tweet = (TweetV2) twitterController.postTweet(args);
-    logger.info("Posted Tweet: \n" + tweet.toString());
-    String tempId = tweet.getId();
-    assertEquals(text, tweet.getText());
+    String tempId = tweet.getData().getId();
+    assertEquals(text, tweet.getData().getText());
 
     String[] args2 = {"delete", tempId};
 
     List<TweetV2> tweetV2List = twitterController.deleteTweet(args2);
-    logger.info(tweetV2List.toString());
     tweetV2List.stream().forEach(tweet2 -> {
-      assertEquals(tempId, tweet2.getId());
-      assertTrue(tweet2.isDeleted());
+      assertEquals(tempId, tweet2.getData().getId());
+      assertTrue(tweet2.getData().isDeleted());
     });
   }
 
@@ -87,9 +81,8 @@ public class TwitterControllerV2IntTest {
     String[] args = {"show", id1, null};
 
     TweetV2 tweet = (TweetV2) twitterController.showTweet(args);
-    logger.info("Returned Tweet: \n" + tweet.toString());
-    assertEquals(id1, tweet.getId());
-    assertEquals(text, tweet.getText());
+    assertEquals(id1, tweet.getData().getId());
+    assertEquals(text, tweet.getData().getText());
   }
 
   /**
