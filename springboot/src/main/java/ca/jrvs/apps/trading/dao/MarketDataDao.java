@@ -40,9 +40,10 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
   private HttpClientConnectionManager httpClientConnectionManager;
 
   /**
-   * Temporary Message
-   * @param httpClientConnectionManager Temp
-   * @param marketDataConfig Temp
+   * Constructor for the MarketDataDao, it takes a HttpClientConnection Manager and
+   * the MarketDataConfig.
+   * @param httpClientConnectionManager gets httpclient connections from the manager.
+   * @param marketDataConfig config to get host URL and the API token.
    */
   @Autowired
   public MarketDataDao(HttpClientConnectionManager httpClientConnectionManager,
@@ -63,11 +64,13 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
   }
 
   /**
-   * Temporary Message
-   * @param symbol Temp
-   * @return Temp
-   * @throws IllegalArgumentException Temp
-   * @throws DataRetrievalFailureException Temp
+   * Finds a single IexQuote given the unique ID/symbol/ticker in String format. Returns
+   * the optional object which could either be empty or contain the IexQuote if found.
+   * @param symbol String that contains the unique ID/symbol/ticker for the quote.
+   * @return returns an optional object which could be empty or have IexQuote object.
+   * @throws IllegalArgumentException Throws if ID/symbol/ticker is invalid
+   * @throws DataRetrievalFailureException Throws if the call to findAllById retrieves more than
+   * one quote meaning there is some unexpected logical error.
    */
   @Override
   public Optional<IexQuote> findById(String symbol) {
@@ -80,7 +83,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
       iexQuoteOptional = Optional.of(iexQuoteList.get(0));
     } else {
       throw new DataRetrievalFailureException(""
-          + "Unexpected Error: number of quotes.");
+          + "Unexpected MarketDataDao Error: number of quotes (2 or more).");
     }
 
     return iexQuoteOptional;
@@ -97,11 +100,16 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
   }
 
   /**
-   * Temporary Message
-   * @param symbols Temp
-   * @return Temp
-   * @throws IllegalArgumentException Temp
-   * @throws DataRetrievalFailureException Temp
+   * Creates a URL containing the token and multiple IDs/symbols/tickers and gets a String http
+   * response body that is then converted into a JSONObject and returns a List containing IexQuote
+   * objects populated with data from each object in the JSONObject.
+   *  calls executeHttpGet to get the http response body
+   *  calls mapJsonToIexQuote to get a List of IexQuotes and returns it.
+   *
+   * @param symbols Iterable String object containing unique IDs/symbols/tickers.
+   * @return returns a List of IexQuote objects.
+   * @throws IllegalArgumentException throws if ID/symbol/ticker is invalid.
+   * @throws DataRetrievalFailureException throws if unexpected error when retrieving data from API.
    */
   @Override
   public List<IexQuote> findAllById(Iterable<String> symbols) {
@@ -116,13 +124,13 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
 
     String responseBody = executeHttpGet(iexBatchUrl + IEX_SYMBOLS + stringBuilder.toString())
         .orElseThrow(() -> new IllegalArgumentException(""
-            + "Error: Invalid Symbol/Id/Ticker"));
+            + "MarketDataDao Error: Invalid Symbol/Id/Ticker"));
 
     JSONObject iexQuotesJson = new JSONObject(responseBody);
 
     if (iexQuotesJson.length() == 0) {
       throw new IllegalArgumentException(""
-          + "Error: Invalid Symbol/Id/Ticker");
+          + "MarketDataDao Error: Invalid Symbol/Id/Ticker");
     }
 
     return mapJsonToIexQuote(iexQuotesJson, symbols.iterator());
@@ -154,9 +162,10 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
   }
 
   /**
-   * Temporary Message
-   * @param url temp
-   * @return temp
+   * executes an HTTP GET method given the url and gets a HttpClient from the getHttpClient method,
+   * gets a Http Response Body, converts the body into a string and returns that string.
+   * @param url url containing the token and symbol query values.
+   * @return returns an optional object that could either contain a String or be empty.
    */
   private Optional<String> executeHttpGet(String url) {
     Optional<String> stringOptional;
@@ -174,7 +183,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
         stringOptional = Optional.of(EntityUtils.toString(httpResponse.getEntity()));
 
       } else {
-        throw new DataRetrievalFailureException("Unexpected Error: "
+        throw new DataRetrievalFailureException("Unexpected MarketDataDao Error: "
             + responseCode + " - " + responsePhrase);
 
       }
@@ -186,8 +195,8 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
   }
 
   /**
-   * Temporary Message
-   * @return temp
+   * Gets a CloseableHttpClient from the HttpClientConnectionManager and returns that HttpClient.
+   * @return Returns a CLoseableHttpClient.
    */
   private CloseableHttpClient getHttpClient() {
     return HttpClients.custom()
@@ -197,10 +206,12 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
   }
 
   /**
-   * Temporary Message
-   * @param jsonObject temp
-   * @param iterator temp
-   * @return temp
+   * Given the JsonObject containing one or more quote objects in Json String format, and the
+   * String iterator, for each symbol in the String iterator convert the appropriate JsonObject
+   * from the key into a String, and use this String to populate the IexQuote.
+   * @param jsonObject JSONObject that could contain one or more quotes
+   * @param iterator iterator containing all the symbols, used to map each IexQuote.
+   * @return returns a List of IexQuotes populated with data from the JsonObject.
    */
   private List<IexQuote> mapJsonToIexQuote(JSONObject jsonObject, Iterator<String> iterator) {
     List<IexQuote> iexQuoteList = new ArrayList<>();
@@ -215,7 +226,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
       } catch (IOException e) {
         throw new RuntimeException(e);
       } catch (JSONException e) {
-        throw new IllegalArgumentException("Unexpected Error: "
+        throw new IllegalArgumentException("Unexpected MarketDataDao Error: "
             + "Invalid Symbol/ID/Ticker: " + e.getMessage(), e);
       }
     }
