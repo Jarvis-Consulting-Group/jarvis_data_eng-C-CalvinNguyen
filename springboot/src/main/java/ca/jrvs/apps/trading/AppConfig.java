@@ -1,8 +1,13 @@
 package ca.jrvs.apps.trading;
 
 import ca.jrvs.apps.trading.model.config.MarketDataConfig;
+import javax.sql.DataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.postgresql.ds.PGConnectionPoolDataSource;
+import org.postgresql.ds.PGPoolingDataSource;
+import org.postgresql.ds.PGSimpleDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
@@ -43,5 +48,26 @@ public class AppConfig {
     connectionManager.setDefaultMaxPerRoute(50);
 
     return connectionManager;
+  }
+
+  /**
+   * Configures a Bean datasource that will be used as a dependency when initializing JdbcTemplates.
+   * @return returns a datasource configured for the postgresql database.
+   */
+  @Bean
+  public DataSource dataSource() {
+    String databaseUrl = "jdbc:postgresql://"
+        + System.getenv("PSQL_HOST") + ":"
+        + System.getenv("PSQL_PORT") + "/"
+        + System.getenv("PSQL_DB");
+    String databaseUser = System.getenv("PSQL_USER");
+    String databasePassword = System.getenv("PSQL_PASSWORD");
+
+    PGSimpleDataSource dataSource = new PGSimpleDataSource();
+    dataSource.setUrl(databaseUrl);
+    dataSource.setUser(databaseUser);
+    dataSource.setPassword(databasePassword);
+
+    return dataSource;
   }
 }
