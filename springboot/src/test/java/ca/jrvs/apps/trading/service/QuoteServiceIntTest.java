@@ -4,6 +4,11 @@ import static org.junit.Assert.*;
 
 import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.dao.QuoteDao;
+import ca.jrvs.apps.trading.model.domain.IexQuote;
+import ca.jrvs.apps.trading.model.domain.Quote;
+import java.util.Arrays;
+import java.util.List;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,25 +31,54 @@ public class QuoteServiceIntTest {
   @Before
   public void setUp() throws Exception {
     quoteDao.deleteAll();
+    quoteService.saveQuote("AMD");
+  }
+
+  @After
+  public void after() throws Exception {
+    quoteDao.deleteAll();
   }
 
   @Test
   public void findIexQuoteBySymbol() {
+    String symbol = "AAPL";
+    IexQuote iexQuote = quoteService.findIexQuoteBySymbol(symbol);
+    assertEquals(symbol, iexQuote.getSymbol());
   }
 
   @Test
   public void findAllQuotes() {
+    List<Quote> quoteList = quoteService.findAllQuotes();
+    assertEquals("AMD", quoteList.get(0).getId());
   }
 
   @Test
   public void saveQuote() {
+    Quote quote = null;
+    if (quoteDao.findById("AMD").isPresent()) {
+      quote = quoteDao.findById("AMD").get();
+    } else {
+      fail();
+    }
+
+    quote.setAskPrice(50.0);
+    Quote assertQuote = quoteService.saveQuote(quote);
+    assertEquals(Double.valueOf(50.0), Double.valueOf(assertQuote.getAskPrice()));
   }
 
   @Test
   public void updateMarketData() {
+    quoteService.updateMarketData();
+
+    List<Quote> quoteList = quoteService.findAllQuotes();
+    assertEquals("AMD", quoteList.get(0).getId());
   }
 
   @Test
   public void saveQuotes() {
+    quoteService.saveQuotes(Arrays.asList("AMD"));
+
+    List<Quote> quoteList = quoteService.findAllQuotes();
+    assertEquals("AMD", quoteList.get(0).getId());
   }
 }
