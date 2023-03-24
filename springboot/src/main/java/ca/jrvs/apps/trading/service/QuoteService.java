@@ -60,7 +60,7 @@ public class QuoteService {
     return returnQuote;
   }
 
-  public void updateMarketData() {
+  public List<Quote> updateMarketData() {
     List<Quote> quoteList = findAllQuotes();
     List<Quote> updatedList = new ArrayList<>();
 
@@ -69,7 +69,7 @@ public class QuoteService {
       updatedList.add(buildQuoteFromIexQuote(iexQuote));
     });
 
-    quoteDao.saveAll(updatedList);
+    return quoteDao.saveAll(updatedList);
   }
 
   protected static Quote buildQuoteFromIexQuote(IexQuote iexQuote) {
