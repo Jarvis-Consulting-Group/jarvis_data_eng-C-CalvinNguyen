@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Position;
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,7 +29,7 @@ public class PositionDao implements CrudRepository<Position, Integer> {
   }
 
   public Optional<Position> findByAccountIdAndTicker(Integer accountId, String ticker) {
-    String findSql = "";
+    String findSql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_COLUMN + "=? AND ticker=?";
     Optional<Position> position = Optional.empty();
 
     Object[] searchValues = {

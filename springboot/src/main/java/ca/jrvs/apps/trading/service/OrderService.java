@@ -60,10 +60,10 @@ public class OrderService {
 
       if ((marketOrder.getSize() * quote.getAskPrice()) > account.getAmount().doubleValue()) {
         securityOrder.setNotes("Insufficient funds for order");
-        securityOrder.setStatus("CANCELLED");
+        securityOrder.setStatus("CANCELED");
       } else {
         securityOrder.setNotes("fulfilled order.");
-        securityOrder.setStatus("FULFILLED");
+        securityOrder.setStatus("FILLED");
       }
       handleBuyMarketOrder(marketOrder, securityOrder);
     }
@@ -84,11 +84,11 @@ public class OrderService {
     securityOrder = securityOrderDao.save(securityOrder);
   }
 
-  protected void handleSellMarketOrder(MarketOrder marketOrder, SecurityOrder securityOrder) {
+  protected void handleSellMarketOrder(MarketOrder marketOrder, SecurityOrder securityOrder) throws DataRetrievalFailureException {
     Optional<Position> optionalPosition = positionDao.findByAccountIdAndTicker(
         marketOrder.getAccountId(), marketOrder.getTicker());
     if (!optionalPosition.isPresent()) {
-      throw new DataRetrievalFailureException("Unable to find positions "
+      throw new IllegalArgumentException("Unable to find positions "
           + "to sell with ticker symbol: " + marketOrder.getTicker());
     }
 
@@ -96,17 +96,17 @@ public class OrderService {
     securityOrder.setAccountId(marketOrder.getAccountId());
     securityOrder.setSize(marketOrder.getSize());
     securityOrder.setTicker(marketOrder.getTicker());
-    int total = position.getPosition() - marketOrder.getSize();
+    int total = position.getPosition() + marketOrder.getSize();
 
     if (total < 0) {
       securityOrder.setNotes("Insufficient positions with ticker symbol: "
           + marketOrder.getTicker()
           + ", currently only possess: " + position.getPosition());
-      securityOrder.setStatus("CANCELLED");
+      securityOrder.setStatus("CANCELED");
     } else {
       securityOrder.setNotes("Fulfilled: remaining positions with ticker symbol "
           + marketOrder.getTicker() + " is: " + total);
-      securityOrder.setStatus("FULFILLED");
+      securityOrder.setStatus("FILLED");
     }
 
     securityOrder = securityOrderDao.save(securityOrder);
