@@ -9,7 +9,7 @@ public class Trader implements Entity<Integer> {
   private String lastName;
   private String email;
   private String country;
-  private Date dob;
+  private String dob;
 
 
   @Override
@@ -54,11 +54,11 @@ public class Trader implements Entity<Integer> {
     this.country = country;
   }
 
-  public Date getDob() {
+  public String getDob() {
     return dob;
   }
 
-  public void setDob(Date dob) {
+  public void setDob(String dob) {
     this.dob = dob;
   }
 }

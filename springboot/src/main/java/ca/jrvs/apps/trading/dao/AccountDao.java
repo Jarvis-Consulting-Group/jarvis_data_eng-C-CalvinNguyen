@@ -1,10 +1,13 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Account;
+import java.util.Optional;
 import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -62,6 +65,23 @@ public class AccountDao extends JdbcCrudDao<Account> {
     };
 
     return getJdbcTemplate().update(updateSql, updatedValues);
+  }
+
+  public Optional<Account> findByTraderId(Integer traderId) {
+    Optional<Account> account = Optional.empty();
+    String traderSql = "SELECT * FROM " + getTableName() + " WHERE trader_id=?";
+
+    try {
+      account = Optional.ofNullable((Account)  getJdbcTemplate()
+          .queryForObject(
+              traderSql,
+              BeanPropertyRowMapper.newInstance(getEntityClass()),
+              traderId));
+    } catch (IncorrectResultSizeDataAccessException e) {
+      logger.debug("Can't find account with trader id: " + traderId, e);
+    }
+
+    return account;
   }
 
   @Override
