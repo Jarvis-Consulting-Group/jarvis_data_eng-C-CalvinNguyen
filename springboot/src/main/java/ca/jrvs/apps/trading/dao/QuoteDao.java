@@ -92,9 +92,10 @@ public class QuoteDao implements CrudRepository<Quote, String> {
   @Override
   public Optional<Quote> findById(String s) {
     String findSql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_NAME + "=?";
+    Optional<Quote> optionalQuote = Optional.empty();
 
     try {
-      Quote quote = this.jdbcTemplate.queryForObject(
+      optionalQuote = Optional.ofNullable(this.jdbcTemplate.queryForObject(
           findSql,
           (resultSet, rowNum) -> {
             Quote tempQuote = new Quote();
@@ -107,17 +108,13 @@ public class QuoteDao implements CrudRepository<Quote, String> {
 
             return tempQuote;
           },
-          s);
-
-      if (quote == null) {
-        return Optional.empty();
-      } else {
-        return Optional.of(quote);
-      }
+          s));
 
     } catch (EmptyResultDataAccessException e) {
-      return Optional.empty();
+      logger.debug("Error getting ticker from database: " + s, e);
     }
+
+    return optionalQuote;
   }
 
   @Override
