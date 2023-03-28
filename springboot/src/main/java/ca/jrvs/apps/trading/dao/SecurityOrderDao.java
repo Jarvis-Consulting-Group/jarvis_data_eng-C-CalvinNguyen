@@ -6,6 +6,8 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
@@ -67,6 +69,17 @@ public class SecurityOrderDao extends JdbcCrudDao<SecurityOrder> {
     };
 
     return getJdbcTemplate().update(updateSql, updatedValues);
+  }
+
+  public void deleteByAccountId(Integer accountId) {
+    String deleteSql = "DELETE FROM " + getTableName()
+        + " WHERE account_id=?";
+
+    try {
+      getJdbcTemplate().update(deleteSql, accountId);
+    } catch (DataAccessException e) {
+      logger.debug("Error deleting by account id: " + accountId, e);
+    }
   }
 
   @Override

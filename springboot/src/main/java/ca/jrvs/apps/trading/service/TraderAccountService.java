@@ -70,11 +70,10 @@ public class TraderAccountService {
     for (Position position : positionList) {
       if (position.getPosition() != 0) {
         throw new IllegalArgumentException("Positions are not closed");
-      } else {
-        securityOrderDao.deleteById(position.getId());
       }
     }
 
+    securityOrderDao.deleteByAccountId(account.getId());
     accountDao.deleteById(account.getId());
     traderDao.deleteById(traderId);
   }
