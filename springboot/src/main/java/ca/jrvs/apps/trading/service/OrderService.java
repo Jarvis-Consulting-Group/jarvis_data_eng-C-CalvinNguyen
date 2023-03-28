@@ -88,8 +88,8 @@ public class OrderService {
     Optional<Position> optionalPosition = positionDao.findByAccountIdAndTicker(
         marketOrder.getAccountId(), marketOrder.getTicker());
     if (!optionalPosition.isPresent()) {
-      throw new IllegalArgumentException("Unable to find positions "
-          + "to sell with ticker symbol: " + marketOrder.getTicker());
+      throw new IllegalArgumentException("Unable to find any positions "
+          + " with ticker symbol: " + marketOrder.getTicker());
     }
 
     Position position = optionalPosition.get();

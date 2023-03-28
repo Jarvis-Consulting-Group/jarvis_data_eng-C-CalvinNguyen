@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -44,7 +45,7 @@ public class PositionDao implements CrudRepository<Position, Integer> {
               BeanPropertyRowMapper.newInstance(Position.class),
               searchValues
           ));
-    } catch (IncorrectResultSizeDataAccessException e) {
+    } catch (EmptyResultDataAccessException e) {
       logger.debug("Can't find with account id " + accountId + " and ticker: " + ticker, e);
     }
 
