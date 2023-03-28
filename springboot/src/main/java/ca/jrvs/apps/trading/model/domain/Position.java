@@ -6,15 +6,7 @@ public class Position implements Entity<Integer> {
   private Integer position;
   private String ticker;
 
-  @Override
-  public Integer getId() {
-    return position;
-  }
 
-  @Override
-  public void setId(Integer id) {
-    this.position = id;
-  }
 
   public Integer getAccountId() {
     return accountId;
@@ -38,5 +30,15 @@ public class Position implements Entity<Integer> {
 
   public void setTicker(String ticker) {
     this.ticker = ticker;
+  }
+
+  @Override
+  public Integer getId() {
+    return null;
+  }
+
+  @Override
+  public void setId(Integer integer) {
+
   }
 }
