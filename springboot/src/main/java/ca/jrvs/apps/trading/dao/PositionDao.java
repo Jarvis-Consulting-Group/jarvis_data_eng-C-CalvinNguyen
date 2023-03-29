@@ -52,27 +52,6 @@ public class PositionDao implements CrudRepository<Position, Integer> {
     return position;
   }
 
-  public boolean existsByAccountIdAndTicker(Integer accountId, String ticker) {
-    String existSql = "SELECT count(*) FROM " + TABLE_NAME
-        + " WHERE " + ID_COLUMN + "=? AND ticker=?";
-
-    Object[] searchValues = {
-        accountId,
-        ticker
-    };
-
-    Integer rowNum = this.jdbcTemplate.queryForObject(
-        existSql,
-        Integer.class,
-        searchValues);
-
-    if (rowNum == null) {
-      return false;
-    } else {
-      return rowNum == 1;
-    }
-  }
-
   @Override
   public List<Position> findAllById(Iterable<Integer> iterable) {
     List<Position> positionList = new ArrayList<>();
