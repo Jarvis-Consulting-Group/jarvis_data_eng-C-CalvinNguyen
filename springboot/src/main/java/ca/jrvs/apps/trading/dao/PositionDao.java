@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.dao;
 
 import ca.jrvs.apps.trading.model.domain.Position;
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import javax.sql.DataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -28,7 +30,7 @@ public class PositionDao implements CrudRepository<Position, Integer> {
   }
 
   public Optional<Position> findByAccountIdAndTicker(Integer accountId, String ticker) {
-    String findSql = "";
+    String findSql = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID_COLUMN + "=? AND ticker=?";
     Optional<Position> position = Optional.empty();
 
     Object[] searchValues = {
@@ -43,7 +45,7 @@ public class PositionDao implements CrudRepository<Position, Integer> {
               BeanPropertyRowMapper.newInstance(Position.class),
               searchValues
           ));
-    } catch (IncorrectResultSizeDataAccessException e) {
+    } catch (EmptyResultDataAccessException e) {
       logger.debug("Can't find with account id " + accountId + " and ticker: " + ticker, e);
     }
 
