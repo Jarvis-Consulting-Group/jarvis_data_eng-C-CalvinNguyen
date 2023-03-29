@@ -113,6 +113,9 @@ public class OrderService {
   }
 
   private void checkInputs(MarketOrder marketOrder) throws IllegalArgumentException {
+    if (marketOrder == null) {
+      throw new IllegalArgumentException("Invalid: marketOrder is null");
+    }
     if (marketOrder.getAccountId() == null) {
       throw new IllegalArgumentException("Invalid: Account ID is null.");
     }
