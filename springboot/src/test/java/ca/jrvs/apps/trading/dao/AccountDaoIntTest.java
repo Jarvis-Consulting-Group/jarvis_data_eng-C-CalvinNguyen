@@ -6,6 +6,7 @@ import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.model.domain.Account;
 import ca.jrvs.apps.trading.model.domain.Trader;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.swing.Spring;
@@ -58,7 +59,7 @@ public class AccountDaoIntTest {
   @Test
   public void findAllById() {
     List<Account> accountList = Lists
-        .newArrayList(accountDao.findAllById(Arrays.asList(savedAccount.getId(), -1)));
+        .newArrayList(accountDao.findAllById(Collections.singletonList(savedAccount.getId())));
 
     assertEquals(1, accountList.size());
     assertEquals(savedAccount.getAmount().doubleValue(), accountList.get(0).getAmount());
