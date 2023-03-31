@@ -1,6 +1,7 @@
 package ca.jrvs.apps.trading.service;
 
 import ca.jrvs.apps.trading.dao.AccountDao;
+import ca.jrvs.apps.trading.dao.AccountJpaDao;
 import ca.jrvs.apps.trading.dao.PositionDao;
 import ca.jrvs.apps.trading.dao.SecurityOrderDao;
 import ca.jrvs.apps.trading.dao.TraderDao;
@@ -10,10 +11,10 @@ import ca.jrvs.apps.trading.model.domain.Trader;
 import ca.jrvs.apps.trading.model.domain.TraderAccountView;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * TraderAccountService contains a TraderDao, AccountDao, PositionDao, and SecurityOrderDao. the
@@ -21,10 +22,10 @@ import org.springframework.stereotype.Service;
  * from the account.
  */
 @Service
-public class TraderAccountService {
+public class TraderAccountJpaService {
 
   private final TraderDao traderDao;
-  private final AccountDao accountDao;
+  private final AccountJpaDao accountDao;
   private final PositionDao positionDao;
   private final SecurityOrderDao securityOrderDao;
 
@@ -38,7 +39,7 @@ public class TraderAccountService {
    * @param securityOrderDao SecurityOrderDao for working with the Security_Order table.
    */
   @Autowired
-  public TraderAccountService(TraderDao traderDao, AccountDao accountDao,
+  public TraderAccountJpaService(TraderDao traderDao, AccountJpaDao accountDao,
       PositionDao positionDao, SecurityOrderDao securityOrderDao) {
     this.traderDao = traderDao;
     this.accountDao = accountDao;
@@ -54,6 +55,7 @@ public class TraderAccountService {
    * @throws IllegalArgumentException throws an IllegalArgumentException if the given trader or any
    *                                  of its properties are null
    */
+  @Transactional
   public TraderAccountView createTraderAndAccount(Trader trader) throws IllegalArgumentException {
     checkTrader(trader);
     Trader tempTrader = traderDao.save(trader);
@@ -77,14 +79,13 @@ public class TraderAccountService {
    * @param traderId Integer traderId used to delete the Trader and related Security Orders and
    *                 Account.
    */
+  @Transactional
   public void deleteTraderById(Integer traderId) {
     if (traderId == null) {
       throw new IllegalArgumentException("traderId is null");
     }
 
-    Account account = accountDao.findByTraderId(traderId)
-        .orElseThrow(
-            () -> new IllegalArgumentException("Unable to find Trader by ID: " + traderId));
+    Account account = accountDao.getAccountByTraderId(traderId);
 
     if (account.getAmount().doubleValue() != 0.0) {
       throw new IllegalArgumentException("Account balance is not empty");
@@ -100,8 +101,11 @@ public class TraderAccountService {
     }
 
     securityOrderDao.deleteByAccountId(account.getId());
-    accountDao.deleteById(account.getId());
-    traderDao.deleteById(traderId);
+    accountDao.findById(account.getId()).ifPresent(d -> accountDao.deleteById(d.getId()));
+    /* DataIntegrityException is thrown because the JDBCTemplate transaction occurs at the
+    same time or before the accountJpaDao is able to delete the account?
+     */
+    traderDao.findById(traderId).ifPresent(d -> traderDao.deleteById(d.getId()));
   }
 
   /**
@@ -114,22 +118,18 @@ public class TraderAccountService {
    * @throws IllegalArgumentException throws this if we're unable to find the Trader/Account with
    *                                  the given ID.
    */
+  @Transactional
   public Account deposit(Integer traderId, Double fund) throws IllegalArgumentException {
     checkAccountBalance(traderId, fund);
 
-    Account account = accountDao.findByTraderId(traderId)
-        .orElseThrow(() -> new IllegalArgumentException("Error retrieving account"));
+    Account account = accountDao.getAccountByTraderId(traderId);
 
     Double balance = account.getAmount().doubleValue() + fund;
     account.setAmount(balance);
 
-    int rowNum = accountDao.updateOne(account);
+    account = accountDao.save(account);
 
-    if (rowNum == 1) {
-      return account;
-    } else {
-      throw new DataRetrievalFailureException("Error updating account balance");
-    }
+    return account;
   }
 
   /**
@@ -143,11 +143,11 @@ public class TraderAccountService {
    *                                  (trader/account doesn't exist), or when there is insufficient
    *                                  funds within the account.
    */
+  @Transactional
   public Account withdraw(Integer traderId, Double fund) throws IllegalArgumentException {
     checkAccountBalance(traderId, fund);
 
-    Account account = accountDao.findByTraderId(traderId)
-        .orElseThrow(() -> new IllegalArgumentException("Error retrieving account"));
+    Account account = accountDao.getAccountByTraderId(traderId);
 
     if (account.getAmount().doubleValue() < fund) {
       throw new IllegalArgumentException("Insufficient funds");
@@ -155,13 +155,10 @@ public class TraderAccountService {
 
     Double balance = account.getAmount().doubleValue() - fund;
     account.setAmount(balance);
-    int rowNum = accountDao.updateOne(account);
 
-    if (rowNum == 1) {
-      return account;
-    } else {
-      throw new DataRetrievalFailureException("Error updating account balance");
-    }
+    account = accountDao.save(account);
+
+    return account;
   }
 
   /**

@@ -105,7 +105,7 @@ public class MarketDataDao implements CrudRepository<IexQuote, String> {
       counter++;
     }
 
-    String responseBody = executeHttpGet(iexBatchUrl + IEX_SYMBOLS + stringBuilder)
+    String responseBody = executeHttpGet(iexBatchUrl + IEX_SYMBOLS + stringBuilder.toString())
         .orElseThrow(() -> new IllegalArgumentException(""
             + "Illegal Argument Error: Invalid Symbol/Id/Ticker"));
 
