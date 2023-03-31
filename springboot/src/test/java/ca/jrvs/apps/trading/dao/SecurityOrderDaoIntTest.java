@@ -69,7 +69,7 @@ public class SecurityOrderDaoIntTest {
 
     savedAccount = new Account();
     savedAccount.setTraderId(1);
-    savedAccount.setAmount(0);
+    savedAccount.setAmount(0d);
     accountDao.save(savedAccount);
 
     savedSecurityOrder = new SecurityOrder();

@@ -2,6 +2,9 @@ package ca.jrvs.apps.trading.model.domain;
 
 import java.util.Date;
 
+/**
+ * Trader DTO when the user creates the trader, it will also create the related account.
+ */
 public class Trader implements Entity<Integer> {
 
   private Integer id;

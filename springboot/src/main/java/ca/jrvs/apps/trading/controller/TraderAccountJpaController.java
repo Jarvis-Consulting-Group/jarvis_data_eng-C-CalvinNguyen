@@ -20,6 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * Controller that uses the TraderAccountJpaService instead of the Spring JDBC implementation
+ * TraderAccountService, however there is an issue with the deletion method
+ * (DataIntegrityException where the trader deletion is called while or before the
+ * account deletion completes).
+ */
 //@Controller
 //@RequestMapping("/jpatrader")
 public class TraderAccountJpaController {

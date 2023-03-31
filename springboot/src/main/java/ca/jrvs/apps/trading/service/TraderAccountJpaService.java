@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * TraderAccountService contains a TraderDao, AccountDao, PositionDao, and SecurityOrderDao. the
+ * TraderAccountService contains a TraderDao, AccountJpaDao, PositionDao, and SecurityOrderDao. the
  * main purposes for this service is to create/delete a Trader/Account and deposit/withdraw funds
  * from the account.
  */
@@ -34,7 +34,7 @@ public class TraderAccountJpaService {
    * will manage the lifecycles of this component and the dependencies.
    *
    * @param traderDao        TraderDao for working with the Trader table.
-   * @param accountDao       AccountDao for working with the Account Table.
+   * @param accountDao       AccountJpaDao for working with the Account Table.
    * @param positionDao      PositionDao for working with the Position View.
    * @param securityOrderDao SecurityOrderDao for working with the Security_Order table.
    */

@@ -1,7 +1,6 @@
 package ca.jrvs.apps.trading.service;
 
 import ca.jrvs.apps.trading.dao.MarketDataDao;
-import ca.jrvs.apps.trading.dao.QuoteDao;
 import ca.jrvs.apps.trading.dao.QuoteJpaDao;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
 import ca.jrvs.apps.trading.model.domain.Quote;
@@ -14,8 +13,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * QuoteService contains a QuoteDao and MarketDataDao, and uses them to perform operations on the
- * IEX REST API or PostgresSQL database.
+ * QuoteJpaService contains a QuoteJpaDao and MarketDataDao, and uses them to perform operations on
+ * the IEX REST API or PostgresSQL database.
  */
 @Transactional
 @Service

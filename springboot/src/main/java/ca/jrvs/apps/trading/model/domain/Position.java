@@ -1,5 +1,9 @@
 package ca.jrvs.apps.trading.model.domain;
 
+/**
+ * Position represents the position view within the database which is the accountId, the sum of all
+ * security order sizes for a given symbol/ticker quote.
+ */
 public class Position implements Entity<Integer> {
 
   private Integer accountId;

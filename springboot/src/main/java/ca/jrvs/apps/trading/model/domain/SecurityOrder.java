@@ -1,5 +1,9 @@
 package ca.jrvs.apps.trading.model.domain;
 
+/**
+ * SecurityOrder DTO is created when the user makes a market order, it will contain information
+ * about the account, the market order, the quote, etc.
+ */
 public class SecurityOrder implements Entity<Integer> {
 
   private Integer id;
