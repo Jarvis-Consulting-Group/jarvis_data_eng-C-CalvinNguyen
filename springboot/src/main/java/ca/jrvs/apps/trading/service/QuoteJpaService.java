@@ -1,7 +1,7 @@
 package ca.jrvs.apps.trading.service;
 
 import ca.jrvs.apps.trading.dao.MarketDataDao;
-import ca.jrvs.apps.trading.dao.QuoteDao;
+import ca.jrvs.apps.trading.dao.QuoteJpaDao;
 import ca.jrvs.apps.trading.model.domain.IexQuote;
 import ca.jrvs.apps.trading.model.domain.Quote;
 import java.util.ArrayList;
@@ -13,15 +13,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * QuoteService contains a QuoteDao and MarketDataDao, and uses them to perform operations on the
- * IEX REST API or PostgresSQL database.
+ * QuoteJpaService contains a QuoteJpaDao and MarketDataDao, and uses them to perform operations on
+ * the IEX REST API or PostgresSQL database.
  */
 @Transactional
 @Service
-public class QuoteService {
+public class QuoteJpaService {
 
-  private static final Logger logger = LoggerFactory.getLogger(QuoteService.class);
-  private final QuoteDao quoteDao;
+  private static final Logger logger = LoggerFactory.getLogger(QuoteJpaService.class);
+  private final QuoteJpaDao quoteDao;
   private final MarketDataDao marketDataDao;
 
   /**
@@ -32,7 +32,7 @@ public class QuoteService {
    * @param marketDataDao MarketDataDao dependency.
    */
   @Autowired
-  public QuoteService(QuoteDao quoteDao, MarketDataDao marketDataDao) {
+  public QuoteJpaService(QuoteJpaDao quoteDao, MarketDataDao marketDataDao) {
     this.quoteDao = quoteDao;
     this.marketDataDao = marketDataDao;
   }

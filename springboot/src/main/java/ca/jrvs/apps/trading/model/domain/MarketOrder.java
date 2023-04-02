@@ -1,5 +1,9 @@
 package ca.jrvs.apps.trading.model.domain;
 
+/**
+ * Object that is created when inputting a market order, the market order will be used for
+ * information that will enter the security_order table and SecurityOrder DTO.
+ */
 public class MarketOrder {
 
   private Integer accountId;

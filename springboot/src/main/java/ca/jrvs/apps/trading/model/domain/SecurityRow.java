@@ -1,5 +1,8 @@
 package ca.jrvs.apps.trading.model.domain;
 
+/**
+ * SecurityRow contains the traders/accounts current positions with the related quote.
+ */
 public class SecurityRow {
 
   private Position position;

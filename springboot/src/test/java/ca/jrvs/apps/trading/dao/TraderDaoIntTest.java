@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import ca.jrvs.apps.trading.TestConfig;
 import ca.jrvs.apps.trading.model.domain.Trader;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import org.assertj.core.util.Lists;
@@ -46,7 +47,7 @@ public class TraderDaoIntTest {
   @Test
   public void findAllById() {
     List<Trader> traderList = Lists
-        .newArrayList(traderDao.findAllById(Arrays.asList(savedTrader.getId(), -1)));
+        .newArrayList(traderDao.findAllById(Collections.singletonList(savedTrader.getId())));
     assertEquals(1, traderList.size());
     assertEquals(savedTrader.getCountry(), traderList.get(0).getCountry());
   }

@@ -1,13 +1,21 @@
 package ca.jrvs.apps.trading.model.domain;
 
+import javax.persistence.*;
+
+@javax.persistence.Entity
+@Table(name = "account")
 public class Account implements Entity<Integer> {
 
+  @Id
+  @Column(name = "id")
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
+  @Column(name = "trader_id")
   private Integer traderId;
 
-  private Number amount;
-
+  @Column(name = "amount")
+  private Double amount;
 
   @Override
   public Integer getId() {
@@ -27,11 +35,11 @@ public class Account implements Entity<Integer> {
     this.traderId = traderId;
   }
 
-  public Number getAmount() {
+  public Double getAmount() {
     return amount;
   }
 
-  public void setAmount(Number amount) {
+  public void setAmount(Double amount) {
     this.amount = amount;
   }
 }

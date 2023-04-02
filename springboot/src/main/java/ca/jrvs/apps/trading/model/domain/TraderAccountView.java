@@ -1,5 +1,9 @@
 package ca.jrvs.apps.trading.model.domain;
 
+/**
+ * DTO returned by the TraderAccountService, it includes the trader object and related account
+ * object using records from the database.
+ */
 public class TraderAccountView {
   private Trader trader;
   private Account account;

@@ -102,7 +102,7 @@ public class OrderServiceUnitTest {
     Optional<Quote> mockOptionalQuote = Optional.of(savedQuote);
     when(mockQuoteDao.findById("AMD")).thenReturn(mockOptionalQuote);
 
-    savedAccount.setAmount(1);
+    savedAccount.setAmount(1d);
     Optional<Account> mockOptionalAccount = Optional.of(savedAccount);
     when(mockAccountDao.findById(savedMarketOrder.getAccountId())).thenReturn(mockOptionalAccount);
 

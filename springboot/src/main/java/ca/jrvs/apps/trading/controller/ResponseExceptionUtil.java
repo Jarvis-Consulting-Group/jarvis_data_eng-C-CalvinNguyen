@@ -14,9 +14,10 @@ public class ResponseExceptionUtil {
   public static final Logger logger = LoggerFactory.getLogger(ResponseExceptionUtil.class);
 
   /**
-   * If an exception is thrown in any of the dependencies, throw a ResponseStatusException,
-   * one being a bad request if there is an IllegalArgumentException and the other being an internal
-   * server error for unexpected errors.
+   * If an exception is thrown in any of the dependencies, throw a ResponseStatusException, one
+   * being a bad request if there is an IllegalArgumentException and the other being an internal
+   * server error for other errors/exceptions.
+   *
    * @param e the exception from the dependencies.
    * @return returns the ResponseStatusException with the appropriate message and Http Status.
    */

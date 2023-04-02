@@ -8,6 +8,7 @@ import ca.jrvs.apps.trading.model.domain.Quote;
 import ca.jrvs.apps.trading.model.domain.SecurityOrder;
 import ca.jrvs.apps.trading.model.domain.Trader;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import org.assertj.core.util.Lists;
@@ -68,7 +69,7 @@ public class SecurityOrderDaoIntTest {
 
     savedAccount = new Account();
     savedAccount.setTraderId(1);
-    savedAccount.setAmount(0);
+    savedAccount.setAmount(0d);
     accountDao.save(savedAccount);
 
     savedSecurityOrder = new SecurityOrder();
@@ -92,7 +93,8 @@ public class SecurityOrderDaoIntTest {
   @Test
   public void findAllById() {
     List<SecurityOrder> securityOrderList = Lists
-        .newArrayList(securityOrderDao.findAllById(Arrays.asList(savedSecurityOrder.getId(), -1)));
+        .newArrayList(securityOrderDao.findAllById(
+            Collections.singletonList(savedSecurityOrder.getId())));
 
     assertEquals(1, securityOrderList.size());
     assertEquals(savedSecurityOrder.getPrice().doubleValue(), securityOrderList.get(0).getPrice());

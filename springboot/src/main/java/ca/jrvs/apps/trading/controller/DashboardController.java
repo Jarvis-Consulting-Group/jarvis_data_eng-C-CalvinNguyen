@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+/**
+ * Controller that is mapped to the dashboard URL path (/dashboard) and calls the appropriate
+ * method when a path segment is given.
+ */
 @Controller
 @RequestMapping("/dashboard")
 public class DashboardController {
@@ -23,6 +27,13 @@ public class DashboardController {
     this.dashboardService = dashboardService;
   }
 
+  /**
+   * Method is called when the WebServlet is given a get request at the path
+   * /dashboard/profile/traderId/{traderId} and the method gets the TraderAccountView with the
+   * Trader and Account information.
+   * @param traderId TraderId used to get the Trader and Account.
+   * @return TraderAccountView containing a Trader and Account.
+   */
   @GetMapping(path = "/profile/traderId/{traderId}")
   @ResponseBody
   @ResponseStatus(HttpStatus.OK)
@@ -34,6 +45,14 @@ public class DashboardController {
     }
   }
 
+  /**
+   * Method is called when the WebServlet is given a get request at the path
+   * /dashboard/portfolio/traderId/{traderId} and the method gets the PortfolioView which has
+   * the security rows (position, quote, etc.).
+   *
+   * @param traderId TraderId used to get the PortfolioView for that Trader.
+   * @return PortfolioView containing security rows (trader's positions, quote, etc.).
+   */
   @GetMapping(path = "/portfolio/traderId/{traderId}")
   @ResponseBody
   @ResponseStatus(HttpStatus.OK)
