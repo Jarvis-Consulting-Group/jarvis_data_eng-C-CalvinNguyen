@@ -43,6 +43,11 @@
       ],
       "git_url": "/core_java",
       "name": "Core Java Apps"
+    },
+    {
+      "description": "Replacing a legacy monolithic trading system with issues in scalability and maintainability; the Spring Boot app is a proof-of-concept backend REST API designed to resolve these problems by following the microservices architectural design. The microservices architectural design is scalable as more microservices are deployed and is maintainable because downtime or errors in one microservice should not affect another. The trading system allows clients to create accounts, deposit or withdraw funds and purchase or sell stocks. The technologies used to develop the application are Docker for the virtualized isolated runtime environment, a PostgresSQL database to persist the data, Maven manages the project's dependencies, maintains a consistent project structure, and builds/packages the project. The Spring framework is the main part of the project, and it does things like providing a default configuration for Maven and managing the lifecycles of the class components. Spring also adds dependencies like the Apache Tomcat Web Servlet that extends the Java Servlet API, processes HTTP requests, and uses Spring annotations to select the appropriate controller/method based on the path. Another dependency is the Spring JDBC which abstracts the JDBC API and manages the creation/release of connections without the developer having to hardcode them. The project testing involved integration and unit testing with testing libraries like Junit4, Mockito for creating Mock objects, and Spring starter test that utilizes a test config class to create bean objects for the tests. Finally, the application is packaged and deployed within two docker images, one for the PostgresSQL database with the relational database tables and the trading application itself. The part that makes this a microservice is since the backend REST API does not manage any states, a balance loader may manage multiple instances of the backend that acts independently from one another.",
+      "git_url": "/springboot",
+      "name": "Springboot App"
     }
   ],
   "name": "Chi Calvin Nguyen",
