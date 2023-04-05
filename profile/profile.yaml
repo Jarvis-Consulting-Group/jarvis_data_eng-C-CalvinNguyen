@@ -17,23 +17,24 @@ skills:
     - NodeJS
     - Java
     - Maven
+    - Spring
     - Git
     - RDBMS/SQL
+    - Docker
   # At least 5 skills
   competent:
-    - Spring
-    - Docker
-    - Python
     - Agile/Scrum
+    - Linux/Bash
+    - Python
     - REST APIs
     - HTML/CSS
   # At least 5 skills
   familiar:
-    - Linux/Bash
     - C#
     - ASP.NET
     - PHP
     - Swift
+    - Kubernetes
 
 # List of Jarvis projects
 jarvis_projects:

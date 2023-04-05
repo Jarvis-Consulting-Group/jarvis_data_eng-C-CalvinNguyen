@@ -4,11 +4,11 @@ I am a dedicated team player who is inquisitive, punctual, and goes by the book.
 
 ## Skills
 
-**Proficient:** JavaScript, Angular/React, NodeJS, Java, Maven, Git, RDBMS/SQL
+**Proficient:** JavaScript, Angular/React, NodeJS, Java, Maven, Spring, Git, RDBMS/SQL, Docker
 
-**Competent:** Spring, Docker, Python, Agile/Scrum, REST APIs, HTML/CSS
+**Competent:** Agile/Scrum, Linux/Bash, Python, REST APIs, HTML/CSS
 
-**Familiar:** Linux/Bash, C#, ASP.NET, PHP, Swift
+**Familiar:** C#, ASP.NET, PHP, Swift, Kubernetes
 
 ## Jarvis Projects
 
