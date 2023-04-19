@@ -29,7 +29,7 @@ public class AppController {
   @ResponseStatus(HttpStatus.OK)
   public String healthCheck() {
     try {
-      return "I'm healthy";
+      return "I'm healthy v2";
     } catch (Exception e) {
       throw ResponseExceptionUtil.getResponseStatusException(e);
     }
