@@ -12,10 +12,8 @@ import ca.jrvs.apps.trading.model.domain.SecurityRow;
 import ca.jrvs.apps.trading.model.domain.Trader;
 import ca.jrvs.apps.trading.model.domain.TraderAccountView;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.stereotype.Service;
@@ -28,19 +26,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class DashboardService {
 
-  private TraderDao traderDao;
-  private AccountDao accountDao;
-  private PositionDao positionDao;
-  private QuoteDao quoteDao;
+  private final TraderDao traderDao;
+  private final AccountDao accountDao;
+  private final PositionDao positionDao;
+  private final QuoteDao quoteDao;
 
   /**
    * Constructor that takes a TraderDao, AccountDao, PositionDao, and QuoteDao. Spring IoC will
    * manage the lifecycles of this component and the dependencies.
    *
-   * @param traderDao TraderDao for working with the Trader table.
-   * @param accountDao AccountDao for working with the Account table.
+   * @param traderDao   TraderDao for working with the Trader table.
+   * @param accountDao  AccountDao for working with the Account table.
    * @param positionDao PositionDao for working with the Position view.
-   * @param quoteDao QuoteDao for working with the Quote table.
+   * @param quoteDao    QuoteDao for working with the Quote table.
    */
   @Autowired
   public DashboardService(TraderDao traderDao, AccountDao accountDao, PositionDao positionDao,
@@ -62,7 +60,7 @@ public class DashboardService {
         .orElseThrow(() -> new IllegalArgumentException("Invalid traderId"));
 
     Account account = accountDao.findByTraderId(traderId)
-        .orElseThrow(() ->  new IllegalArgumentException("Invalid traderId"));
+        .orElseThrow(() -> new IllegalArgumentException("Invalid traderId"));
 
     TraderAccountView traderAccountView = new TraderAccountView();
     traderAccountView.setTrader(trader);
@@ -74,6 +72,7 @@ public class DashboardService {
   /**
    * Gets the PortfolioView by the traderId, the PortfolioView contains all positions/security rows
    * for the trader.
+   *
    * @param traderId traderId used to get data for the portfolio view.
    * @return PortfolioView returned containing security rows of positions, quote ticker etc.
    */
@@ -99,5 +98,14 @@ public class DashboardService {
     portfolioView.setSecurityRows(securityRowList);
 
     return portfolioView;
+  }
+
+  /**
+   * Returns all the traders within the database.
+   *
+   * @return returns a list of the traders in the database.
+   */
+  public List<Trader> getTraders() {
+    return traderDao.findAll();
   }
 }
