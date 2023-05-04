@@ -1,5 +1,5 @@
-export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL
-    || "http://localhost:8080";
+//export const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
+export const BACKEND_URL = "http://localhost:8080";
 export const tradersUrl = BACKEND_URL + "/dashboard/traders";
 export const createTraderUrl = BACKEND_URL + "/trader";
 export const deleteTraderUrl = BACKEND_URL + "/trader/traderId";

@@ -59,7 +59,7 @@ function TraderList(props) {
 
   return (
       <Table
-          dataSource={dataSource}
+          dataSource={props.traders}
           columns={tableColumns}
           pagination={false}
       />
