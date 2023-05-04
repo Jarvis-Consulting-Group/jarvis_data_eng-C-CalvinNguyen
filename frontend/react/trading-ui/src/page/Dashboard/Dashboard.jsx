@@ -13,19 +13,17 @@ function Dashboard(props) {
 
   const [state, setState] = useState({
     isModalVisible: false,
-    traders: [],
-    firstName: null,
-    lastName: null,
-    email: null,
-    country: null,
-    dob: null
+    traders: []
   })
 
-  const getTraders = () => {
-    setState({
-      ...state,
-      traders: [...TraderListData]
-    })
+  const getTraders = async () => {
+    const res = await axios.get(tradersUrl)
+    if (res) {
+      setState({
+        ...state,
+        traders: [...res.data] || []
+      })
+    }
   }
 
   const showModal = () => {
@@ -36,18 +34,36 @@ function Dashboard(props) {
   }
 
   const handleOk = async () => {
-    console.log("ok is called")
-    // axios.post
-    await getTraders();
-    setState({
-      ...state,
-      isModalVisible: false,
-      firstName: null,
-      lastName: null,
-      dob: null,
-      country: null,
-      email: null
-    })
+    const paramUrl = `/firstname/${state.firstName}`
+        + `/lastname/${state.lastName}`
+        + `/dob/${state.dob}`
+        + `/country/${state.country}`
+        + `/email/${state.email}`
+    const res = await axios.post(createTraderUrl + paramUrl, {}, {})
+    const res2 = await axios.get(tradersUrl)
+
+    if (res2) {
+      setState({
+        ...state,
+        isModalVisible: false,
+        firstName: null,
+        lastName: null,
+        dob: null,
+        country: null,
+        email: null,
+        traders: [...res2.data] || []
+      })
+    } else {
+      setState({
+        ...state,
+        isModalVisible: false,
+        firstName: null,
+        lastName: null,
+        dob: null,
+        country: null,
+        email: null
+      });
+    }
   }
 
   const onInputChange = (field, value) => {
@@ -74,11 +90,12 @@ function Dashboard(props) {
 
   useEffect(() => {
     getTraders()
-  })
+  }, [])
 
   const onTraderDelete = async (id) => {
     console.log("Trader to be deleted: " + id)
-    // axios.delete()
+    const paramUrl = "/" + id
+    const res = await axios.delete(deleteTraderUrl + paramUrl, {})
     await getTraders()
   }
 
@@ -91,8 +108,8 @@ function Dashboard(props) {
             <Button onClick={showModal}>Add New Trader</Button>
 
             <Modal title="Add New Trader" okText="Submit"
-                   visible={state.isModalVisible}
-                   onOk={() => {handleOk()}} onCancel={() => {handleCancel()}}>
+                   open={state.isModalVisible}
+                   onOk={handleOk} onCancel={handleCancel}>
 
               <Form layout="vertical">
 
@@ -132,9 +149,9 @@ function Dashboard(props) {
                   <div className="add-trader-field">
                     <Form.Item label="Date of Birth">
                       <DatePicker style={{width:"100%"}} placeholder=""
-                                  value={state.dob}
-                                  onChange={(date, dateString) => onInputChange(
-                                      "dob, event.target.value")}/>
+                                  onChange={(date, dateString) => {
+                                    if (date != null) { onInputChange(
+                            "dob", date.format("YYYY-MM-DD"))}}} />
                     </Form.Item>
                   </div>
                 </div>
@@ -147,7 +164,8 @@ function Dashboard(props) {
         <NavBar />
 
         <div className="dashboard-content">
-          <TraderList onTraderDeleteClick={onTraderDelete}/>
+          <TraderList onTraderDeleteClick={onTraderDelete}
+                      traders={state.traders}/>
         </div>
       </div>
   )
