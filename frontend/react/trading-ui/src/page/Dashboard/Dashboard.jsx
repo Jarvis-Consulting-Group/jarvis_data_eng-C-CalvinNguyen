@@ -67,16 +67,13 @@ function Dashboard(props) {
   }
 
   const onInputChange = (field, value) => {
-    console.log("field: " + field + ", value: " + value)
     setState({
       ...state,
       [field]: value
     })
-    console.log(state.firstName)
   }
 
   const handleCancel = () => {
-    console.log("cancel is called")
     setState({
       ...state,
       isModalVisible: false,
@@ -93,7 +90,6 @@ function Dashboard(props) {
   }, [])
 
   const onTraderDelete = async (id) => {
-    console.log("Trader to be deleted: " + id)
     const paramUrl = "/" + id
     const res = await axios.delete(deleteTraderUrl + paramUrl, {})
     await getTraders()
