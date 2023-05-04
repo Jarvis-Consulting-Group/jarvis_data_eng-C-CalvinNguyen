@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 
 function Dashboard(props) {
 
+  const [form] = Form.useForm()
   const [state, setState] = useState({
     isModalVisible: false,
     traders: []
@@ -34,6 +35,11 @@ function Dashboard(props) {
   }
 
   const handleOk = async () => {
+    if (state.firstName == null || state.lastName ||
+        state.dob || state.country || state.email) {
+      return
+    }
+
     const paramUrl = `/firstname/${state.firstName}`
         + `/lastname/${state.lastName}`
         + `/dob/${state.dob}`
@@ -43,6 +49,7 @@ function Dashboard(props) {
     const res2 = await axios.get(tradersUrl)
 
     if (res2) {
+      form.resetFields()
       setState({
         ...state,
         isModalVisible: false,
@@ -54,6 +61,7 @@ function Dashboard(props) {
         traders: [...res2.data] || []
       })
     } else {
+      form.resetFields()
       setState({
         ...state,
         isModalVisible: false,
@@ -74,6 +82,7 @@ function Dashboard(props) {
   }
 
   const handleCancel = () => {
+    form.resetFields()
     setState({
       ...state,
       isModalVisible: false,
@@ -107,11 +116,18 @@ function Dashboard(props) {
                    open={state.isModalVisible}
                    onOk={handleOk} onCancel={handleCancel}>
 
-              <Form layout="vertical">
+              <Form layout="vertical" form={form}>
 
                 <div className="add-trader-form">
                   <div className="add-trader-field">
-                    <Form.Item label="First Name">
+                    <Form.Item
+                        name="First Name"
+                        label="First Name"
+                        rules={[{
+                          required: true,
+                          message: "First Name requires an input."
+                        }]}
+                    >
                       <Input allowClear={false} placeholder="John"
                              value={state.firstName}
                              onChange={(event) => onInputChange(
@@ -119,7 +135,14 @@ function Dashboard(props) {
                     </Form.Item>
                   </div>
                   <div className="add-trader-field">
-                    <Form.Item label="Last Name">
+                    <Form.Item
+                        name="Last Name"
+                        label="Last Name"
+                        rules={[{
+                          required: true,
+                          message: "Last Name requires an input."
+                        }]}
+                    >
                       <Input allowClear={false} placeholder="Doe"
                              value={state.lastName}
                              onChange={(event) => onInputChange(
@@ -127,7 +150,15 @@ function Dashboard(props) {
                     </Form.Item>
                   </div>
                   <div className="add-trader-field">
-                    <Form.Item label="Email">
+                    <Form.Item
+                        name="Email"
+                        label="Email"
+                        rules={[{
+                          required: true,
+                          message: "A valid email address must be entered.",
+                          pattern: new RegExp(/^[a-zA-Z0-9]+@[a-zA-Z0-9-]+.[a-zA-Z]+$/)
+                        }]}
+                    >
                       <Input allowClear={false} placeholder="test@email.com"
                              value={state.email}
                              onChange={(event) => onInputChange(
@@ -135,7 +166,14 @@ function Dashboard(props) {
                     </Form.Item>
                   </div>
                   <div className="add-trader-field">
-                    <Form.Item label="Country">
+                    <Form.Item
+                        name="Country"
+                        label="Country"
+                        rules={[{
+                          required: true,
+                          message: "A valid country must be entered"
+                        }]}
+                    >
                       <Input allowClear={false} placeholder="Canada"
                              value={state.country}
                              onChange={(event) => onInputChange(
@@ -143,7 +181,15 @@ function Dashboard(props) {
                     </Form.Item>
                   </div>
                   <div className="add-trader-field">
-                    <Form.Item label="Date of Birth">
+                    <Form.Item
+                        name="Date of Birth"
+                        label="Date of Birth"
+                        rules={[{
+                          type: 'object',
+                          required: true,
+                          message: "Please select a valid date."
+                        }]}
+                    >
                       <DatePicker style={{width:"100%"}} placeholder=""
                                   onChange={(date, dateString) => {
                                     if (date != null) { onInputChange(
