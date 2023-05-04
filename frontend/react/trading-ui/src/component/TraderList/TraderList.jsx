@@ -2,14 +2,23 @@ import React from "react";
 import { Table } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faTrashAlt as deleteIcon
+  faTrashAlt as deleteIcon,
+  faMagnifyingGlass as traderIcon
 } from '@fortawesome/free-solid-svg-icons'
 import 'antd/dist/reset.css'
 import './TraderList.scss'
 import { useState, useEffect } from "react";
 import TraderListData from './TraderListData.json'
+import { useNavigate } from "react-router-dom";
 
 function TraderList(props) {
+
+  let navigate = useNavigate()
+
+  const routeTrader = (traderId) => {
+    let path = "/trader/"
+    navigate(path + traderId)
+  }
 
   const columns = [
     {
@@ -42,9 +51,14 @@ function TraderList(props) {
       dataIndex: 'actions',
       key: 'actions',
       render: (text, record) => (
+          <>
           <div className="trader-delete-icon">
             <FontAwesomeIcon icon={ deleteIcon } onClick={() => props.onTraderDeleteClick(record.id)} />
           </div>
+          <div className="trader-icon">
+            <FontAwesomeIcon icon={ traderIcon } onClick={() => routeTrader(record.id)} />
+          </div>
+          </>
       )
     },
   ]
