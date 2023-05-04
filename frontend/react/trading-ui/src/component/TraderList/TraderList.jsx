@@ -64,12 +64,6 @@ function TraderList(props) {
   ]
 
   const [tableColumns, setTableColumns] = useState(columns)
-  const [dataSource, setDataSource] = useState([])
-
-  useEffect(() => {
-    const dataSource = TraderListData
-    setDataSource(dataSource)
-  })
 
   return (
       <Table

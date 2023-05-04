@@ -4,12 +4,13 @@ import { traderAccountUrl, withdrawFundsUrl,
   depositFundsUrl } from "../../util/constants"
 import 'antd/dist/reset.css'
 import { useParams } from "react-router-dom";
-import { Input, Modal, Button } from "antd";
+import { Input, Modal, Button, Form } from "antd";
 import axios from 'axios'
 import NavBar from "../../component/NavBar/NavBar";
 
 function TraderAccountPage() {
 
+  const [form] = Form.useForm()
   const routeParams = useParams()
 
   const [state, setState] = useState({
@@ -66,6 +67,7 @@ function TraderAccountPage() {
       isDepositModalVisible: false,
       depositFunds: null
     })
+    form.resetFields()
   }
 
   const handleWithdrawCancel = () => {
@@ -74,15 +76,21 @@ function TraderAccountPage() {
       isWithdrawModalVisible: false,
       withdrawFunds: null
     })
+    form.resetFields()
   }
 
   const handleDepositOk = async () => {
+    if (state.depositFunds == null) {
+      return
+    }
+
     const traderDepositUrl = depositFundsUrl + state.traderId + ""
         + "/amount/" + state.depositFunds
     const res = await axios.put(traderDepositUrl)
     if (res) {
       const res = await axios.get(traderAccountUrl + state.traderId)
       if (res) {
+        form.resetFields()
         setState({
           ...state,
           traderId: state.traderId,
@@ -90,6 +98,7 @@ function TraderAccountPage() {
           isDepositModalVisible: false
         })
       } else {
+        form.resetFields()
         setState({
           ...state,
           traderId: state.traderId,
@@ -100,12 +109,17 @@ function TraderAccountPage() {
   }
 
   const handleWithdrawOk = async () => {
+    if (state.withdrawFunds == null) {
+      return
+    }
+
     const traderDepositUrl = withdrawFundsUrl + state.traderId + ""
         + "/amount/" + state.withdrawFunds
     const res = await axios.put(traderDepositUrl)
     if (res) {
       const res = await axios.get(traderAccountUrl + state.traderId)
       if (res) {
+        form.resetFields()
         setState({
           ...state,
           traderId: state.traderId,
@@ -113,6 +127,7 @@ function TraderAccountPage() {
           isWithdrawModalVisible: false
         })
       } else {
+        form.resetFields()
         setState({
           ...state,
           traderId: state.traderId,
@@ -206,12 +221,23 @@ function TraderAccountPage() {
                      open={state.isDepositModalVisible}
                      onOk={handleDepositOk} onCancel={handleDepositCancel}>
                 <div className="funds-form">
-                  <div className="funds-field">
-                    <Input allowClear={false} placeholder="Funds"
-                           value={state.depositFunds}
-                           onChange={(event) => onInputChange(
-                               "depositFunds", event.target.value)} />
-                  </div>
+                  <Form form={form}>
+                    <div className="funds-field">
+                      <Form.Item
+                        name="Amount"
+                        label="Amount"
+                        rules={[{
+                          required: true,
+                          pattern: new RegExp(/^[0-9]+$/),
+                          message: "Amount to deposit has to above 0."
+                        }]}
+                      >
+                        <Input allowClear={false} placeholder="Funds"
+                               onChange={(event) => onInputChange(
+                                   "depositFunds", event.target.value)} />
+                      </Form.Item>
+                    </div>
+                  </Form>
                 </div>
 
               </Modal>
@@ -220,12 +246,23 @@ function TraderAccountPage() {
                      open={state.isWithdrawModalVisible}
                      onOk={handleWithdrawOk} onCancel={handleWithdrawCancel}>
                 <div className="funds-form">
-                  <div className="funds-field">
-                    <Input allowClear={false} placeholder="Funds"
-                           value={state.withdrawFunds}
-                           onChange={(event) => onInputChange(
-                               "withdrawFunds", event.target.value)} />
-                  </div>
+                  <Form form={form}>
+                    <div className="funds-field">
+                      <Form.Item
+                        name="Amount"
+                        label="Amount"
+                        rules={[{
+                          required: true,
+                          pattern: new RegExp(/^[0-9]+$/),
+                          message: "Amount to withdraw has to above 0."
+                        }]}
+                      >
+                        <Input allowClear={false} placeholder="Funds"
+                               onChange={(event) => onInputChange(
+                                   "withdrawFunds", event.target.value)} />
+                      </Form.Item>
+                    </div>
+                  </Form>
                 </div>
               </Modal>
             </div>
