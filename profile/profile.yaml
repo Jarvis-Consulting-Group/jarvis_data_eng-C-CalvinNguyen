@@ -18,23 +18,26 @@ skills:
     - Java
     - Maven
     - Spring
+    - Docker
     - Git
     - RDBMS/SQL
-    - Docker
+    - Agile/Scrum
+    - HTML/CSS
   # At least 5 skills
   competent:
-    - Agile/Scrum
     - Linux/Bash
     - Python
+    - Kubernetes
+    - Azure
+    - DevOps
     - REST APIs
-    - HTML/CSS
   # At least 5 skills
   familiar:
     - C#
     - ASP.NET
     - PHP
     - Swift
-    - Kubernetes
+    - DigitalOcean
 
 # List of Jarvis projects
 jarvis_projects:
@@ -64,9 +67,12 @@ jarvis_projects:
 #  - name: "Spark"
 #    git_url: "/spark"
 #    description: ""
-#  - name: "Cloud/DevOps"
-#    git_url: "/cloud_devops"
-#    description: ""
+  - name: "Cloud/DevOps"
+    git_url: "/cloud_devops"
+    description: "Learn about the Cloud and DevOps as concepts like Public/Private/Hybrid clouds and IaaS/PaaS/SaaS as well as in practice within this project by creating CI/CD pipelines for the Springboot App GitHub repository and deploying the previous Springboot App, which is a backend REST API onto the cloud with container orchestration technologies. Jenkins creates the CI/CD pipelines that automatically build, test, and package/containerize the Springboot app. The Jenkins instance/installation is deployed within a Kubernetes cluster using the Helm package manager (package manager for Kubernetes). Jenkins also uses a customized image for its agents, so they have the necessary dependencies (maven, etc.) to build and test the code. Finally, Microsoft Azure Cloud Services deployed the Springboot application in several ways, the first being through more legacy methods of using virtual machines that can scale their instances based on traffic and to the more current deployment methods of using container orchestration technologies like Kubernetes by utilizing the Platform-as-a-Service Azure Kubernetes Service and creating Kubernetes deployment objects for the Springboot App."
+  - name: "React Frontend App"
+    git_url: "/frontend"
+    description: "Implement a simple Reactjs frontend application that communicates with the backend Springboot trading REST API project allowing administrative users to view a list of traders or quotes and deposit or withdraw funds from the traders' account. The technologies used for this project were Node which allows for JavaScript code to run on the server, npm aka node package manager that manages dependencies and builds the application, and Reactjs with Babel compiling user interfaces for the client from the backend with JSX elements, and Axios so the application can send HTTP requests to the backend Springboot trading REST API. Manual testing is used for the applications pages and components like buttons and forms to ensure the application works as expected and communicates with the backend. Deploying the application onto a local machine involves several steps, cloning the GitHub repository, installing Node and npm, and running the commands npm install and npm start."
 
 # List of personal or academic projects
 # Feel free to add more projects

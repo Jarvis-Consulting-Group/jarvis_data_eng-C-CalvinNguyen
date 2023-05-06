@@ -48,6 +48,16 @@
       "description": "Replacing a legacy monolithic trading system with issues in scalability and maintainability; the Spring Boot app is a proof-of-concept backend REST API designed to resolve these problems by following the microservices architectural design. The microservices architectural design is scalable as more microservices are deployed and is maintainable because downtime or errors in one microservice should not affect another. The trading system allows clients to create accounts, deposit or withdraw funds and purchase or sell stocks. The technologies used to develop the application are Docker for the virtualized isolated runtime environment, a PostgreSQL database to persist the data, and the Maven build tool that manages the project and its dependencies. The Spring framework is the main part of the project, and it does things like providing a default configuration for Maven and managing the lifecycles of the class components. Spring also adds other dependencies like the Apache Tomcat Web Servlet that extends the Java Servlet API, processes HTTP requests, and uses Spring annotations to select the appropriate controller/method based on the path. Another dependency is the Spring JDBC which abstracts the JDBC API and automatically manages the creation/release of connections. The project testing involved integration and unit testing with testing libraries like Junit4, Mockito for creating Mock objects, and Spring starter test that utilizes a test config class to create bean objects for the tests. Finally, the application is packaged and deployed within two docker images, one for the PostgreSQL database with the relational database tables and the trading application itself. The part that makes this a microservice is since the backend REST API does not manage any states, a balance loader may manage multiple instances of the backend that acts independently from one another.",
       "git_url": "/springboot",
       "name": "Springboot App"
+    },
+    {
+      "description": "Learn about the Cloud and DevOps as concepts like Public/Private/Hybrid clouds and IaaS/PaaS/SaaS as well as in practice within this project by creating CI/CD pipelines for the Springboot App GitHub repository and deploying the previous Springboot App, which is a backend REST API onto the cloud with container orchestration technologies. Jenkins creates the CI/CD pipelines that automatically build, test, and package/containerize the Springboot app. The Jenkins instance/installation is deployed within a Kubernetes cluster using the Helm package manager (package manager for Kubernetes). Jenkins also uses a customized image for its agents, so they have the necessary dependencies (maven, etc.) to build and test the code. Finally, Microsoft Azure Cloud Services deployed the Springboot application in several ways, the first being through more legacy methods of using virtual machines that can scale their instances based on traffic and to the more current deployment methods of using container orchestration technologies like Kubernetes by utilizing the Platform-as-a-Service Azure Kubernetes Service and creating Kubernetes deployment objects for the Springboot App.",
+      "git_url": "/cloud_devops",
+      "name": "Cloud/DevOps"
+    },
+    {
+      "description": "Implement a simple Reactjs frontend application that communicates with the backend Springboot trading REST API project allowing administrative users to view a list of traders or quotes and deposit or withdraw funds from the traders' account. The technologies used for this project were Node which allows for JavaScript code to run on the server, npm aka node package manager that manages dependencies and builds the application, and Reactjs with Babel compiling user interfaces for the client from the backend with JSX elements, and Axios so the application can send HTTP requests to the backend Springboot trading REST API. Manual testing is used for the applications pages and components like buttons and forms to ensure the application works as expected and communicates with the backend. Deploying the application onto a local machine involves several steps, cloning the GitHub repository, installing Node and npm, and running the commands npm install and npm start.",
+      "git_url": "/frontend",
+      "name": "React Frontend App"
     }
   ],
   "name": "Chi Calvin Nguyen",
@@ -77,18 +87,19 @@
   ],
   "skills": {
     "competent": [
-      "Agile/Scrum",
       "Linux/Bash",
       "Python",
-      "REST APIs",
-      "HTML/CSS"
+      "Kubernetes",
+      "Azure",
+      "DevOps",
+      "REST APIs"
     ],
     "familiar": [
       "C#",
       "ASP.NET",
       "PHP",
       "Swift",
-      "Kubernetes"
+      "DigitalOcean"
     ],
     "proficient": [
       "JavaScript",
@@ -97,9 +108,11 @@
       "Java",
       "Maven",
       "Spring",
+      "Docker",
       "Git",
       "RDBMS/SQL",
-      "Docker"
+      "Agile/Scrum",
+      "HTML/CSS"
     ]
   },
   "summary": "I am a dedicated team player who is inquisitive, punctual, and goes by the book. I recently graduated with an Ontario College Advanced Diploma from the Computer Programming \u0026 Analysis program at George Brown College. During my time at George Brown, I've learned technologies such as React, Node.js, Angular, MongoDB, Spring, and ASP.NET by building projects like a front-end application that connects to an open-source weather API or full-stack applications where we built both the front and backend while following the Agile project management methodology. I've also gained other skills outside George Brown that are crucial to a workplace. My ability to communicate and act as a team player established itself throughout my time as a bartender/server. I worked in a rough fast-paced environment that required me to be on my toes, give the best possible service to customers, and work within a tight-knit team. I am quite a hobbyist with hobbies such as brewing beer, where I experiment with recipes to get the best possible batch, which is why I also like tech because I constantly learn, test, and create software. Overall, I'm hoping for an opportunity in the software development industry where I can prove myself as a team member."
