@@ -11,6 +11,8 @@ export default function Router() {
                  element={<Dashboard />} />
           <Route exact path="/dashboard"
                  element={<Dashboard />} />
+          <Route exact path="/traders"
+                 element={<Dashboard />} />
           <Route exact path="/quotes"
                  element={<QuotePage />} />
           <Route exact path="/trader/:traderId"
